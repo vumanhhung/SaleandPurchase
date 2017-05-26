@@ -134,6 +134,11 @@ public class Home extends javax.swing.JFrame {
         btnLogout.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnLogout.setForeground(new java.awt.Color(255, 0, 0));
         btnLogout.setText("LogOut");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
 
         lbUsername.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbUsername.setForeground(new java.awt.Color(0, 0, 204));
@@ -235,15 +240,15 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEmployeeActionPerformed
 
     private void btnStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStockActionPerformed
-//        ListBorrower lborrower = new ListBorrower();
-//        lborrower.setVisible(true);
-//        this.dispose();
+        StockDetail sd = new StockDetail();
+        sd.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnStockActionPerformed
 
     private void btnItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnItemActionPerformed
-//        ListPublisher lb = new ListPublisher();
-//        lb.setVisible(true);
-//        this.dispose();
+        ItemDetail id = new ItemDetail();
+        id.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnItemActionPerformed
 
     private void btnSuppllierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuppllierActionPerformed
@@ -265,8 +270,16 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReportActionPerformed
 
     private void btnChangePassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePassActionPerformed
-        // TODO add your handling code here:
+        ChangePassword cp = new ChangePassword();
+        cp.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnChangePassActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        Login login = new Login();
+        login.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**
      * @param args the command line arguments
