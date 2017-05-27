@@ -5,17 +5,49 @@
  */
 package Run;
 
+import GetConnect.MyConnect;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author monki
  */
 public class EmployeeDetail extends javax.swing.JFrame {
-
+    static DefaultTableModel employeeModel;
     /**
      * Creates new form CustomerDetail
      */
     public EmployeeDetail() {
         initComponents();
+        employeeModel = (DefaultTableModel) tbEmployee.getModel();
+        loadData();
+    }
+    
+     public static void loadData() {
+        employeeModel.setRowCount(0);
+        try {
+            Connection conn = MyConnect.getConnection();
+            //CallableStatement callSt = conn.prepareCall("{call getAllBook()}");
+            PreparedStatement ps = conn.prepareStatement("select * from Employee");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String id = rs.getString("employeeID");
+                String employeeName = rs.getString("employeeName");
+                String phoneNumber = rs.getString("phoneNumber");
+                String address = rs.getString("Address");
+                String salary = rs.getString("salary");
+                String dateOfJoin = rs.getString("dateOfJoin");
+                Object[] row = {id, employeeName, phoneNumber, address, salary, dateOfJoin};
+                employeeModel.addRow(row);
+            }
+            tbEmployee.setModel(employeeModel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -29,9 +61,9 @@ public class EmployeeDetail extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbEmployee = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtSearchEmployee = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -40,7 +72,7 @@ public class EmployeeDetail extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setText("Employee Detail");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbEmployee.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -56,10 +88,16 @@ public class EmployeeDetail extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbEmployee);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Search");
+
+        txtSearchEmployee.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchEmployeeKeyReleased(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Home");
@@ -78,7 +116,7 @@ public class EmployeeDetail extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSearchEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,7 +136,7 @@ public class EmployeeDetail extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSearchEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -116,6 +154,31 @@ public class EmployeeDetail extends javax.swing.JFrame {
         home.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtSearchEmployeeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchEmployeeKeyReleased
+        String searchText = txtSearchEmployee.getText();
+       employeeModel.setRowCount(0);
+        try {
+            Connection conn = MyConnect.getConnection();
+            CallableStatement callSt = conn.prepareCall("{call searchEmployee(?)}"); 
+            callSt.setString(1, searchText);
+            //PreparedStatement ps = conn.prepareStatement("select * from Employee");
+            ResultSet rs = callSt.executeQuery();
+            while (rs.next()) {
+                String id = rs.getString("employeeID");
+                String employeeName = rs.getString("employeeName");
+                String phoneNumber = rs.getString("phoneNumber");
+                String address = rs.getString("Address");
+                String salary = rs.getString("salary");
+                String dateOfJoin = rs.getString("dateOfJoin");
+                Object[] row = {id, employeeName, phoneNumber, address, salary, dateOfJoin};
+                employeeModel.addRow(row);
+            }
+            tbEmployee.setModel(employeeModel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_txtSearchEmployeeKeyReleased
 
     /**
      * @param args the command line arguments
@@ -158,7 +221,7 @@ public class EmployeeDetail extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private static javax.swing.JTable tbEmployee;
+    private javax.swing.JTextField txtSearchEmployee;
     // End of variables declaration//GEN-END:variables
 }

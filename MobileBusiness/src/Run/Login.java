@@ -6,6 +6,7 @@
 package Run;
 
 import GetConnect.MyConnect;
+import static Run.Home.lbUsername;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -130,6 +131,7 @@ public class Login extends javax.swing.JFrame {
                         this.setVisible(false);
                         Home home = new Home();
                         home.setVisible(true);
+                        lbUsername.setText("Hello, " + username);
                     }else{
                         JOptionPane.showMessageDialog(null, "Username or password is incorrect");
                     }

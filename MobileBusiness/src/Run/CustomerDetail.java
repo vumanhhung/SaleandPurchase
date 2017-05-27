@@ -5,17 +5,49 @@
  */
 package Run;
 
+import GetConnect.MyConnect;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author monki
  */
 public class CustomerDetail extends javax.swing.JFrame {
+    static DefaultTableModel customerModel;
 
     /**
      * Creates new form CustomerDetail
      */
     public CustomerDetail() {
         initComponents();
+        customerModel = (DefaultTableModel) tbCustomer.getModel();
+        loadData();
+    }
+    
+    public static void loadData() {
+        customerModel.setRowCount(0);
+        try {
+            Connection conn = MyConnect.getConnection();
+            //CallableStatement callSt = conn.prepareCall("{call getAllBook()}");
+            PreparedStatement ps = conn.prepareStatement("select * from Customer");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String id = rs.getString("CustomerID");
+                String customerName = rs.getString("CustomerName");
+                String phoneNumber = rs.getString("PhoneNumber");
+                String customerAddress = rs.getString("CustomerAddress");
+                String customerCompanyAddress = rs.getString("CustomerCompanyAddress");
+                Object[] row = {id, customerName, phoneNumber, customerAddress, customerCompanyAddress};
+                customerModel.addRow(row);
+            }
+            tbCustomer.setModel(customerModel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -29,9 +61,9 @@ public class CustomerDetail extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbCustomer = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtSearchCustomer = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -40,7 +72,7 @@ public class CustomerDetail extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setText("Customer Detail");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbCustomer.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -56,16 +88,22 @@ public class CustomerDetail extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
+        jScrollPane1.setViewportView(tbCustomer);
+        if (tbCustomer.getColumnModel().getColumnCount() > 0) {
+            tbCustomer.getColumnModel().getColumn(1).setResizable(false);
+            tbCustomer.getColumnModel().getColumn(2).setResizable(false);
+            tbCustomer.getColumnModel().getColumn(3).setResizable(false);
+            tbCustomer.getColumnModel().getColumn(4).setResizable(false);
         }
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Search");
+
+        txtSearchCustomer.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchCustomerKeyReleased(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Home");
@@ -84,7 +122,7 @@ public class CustomerDetail extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSearchCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,7 +142,7 @@ public class CustomerDetail extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSearchCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -122,6 +160,30 @@ public class CustomerDetail extends javax.swing.JFrame {
         home.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtSearchCustomerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchCustomerKeyReleased
+           String searchText = txtSearchCustomer.getText();
+       customerModel.setRowCount(0);
+        try {
+            Connection conn = MyConnect.getConnection();
+            CallableStatement callSt = conn.prepareCall("{call searchCustomer(?)}");
+//            PreparedStatement ps = conn.prepareStatement("select * from Customer where CustomerName like '%?%'");
+            callSt.setString(1, searchText);
+            ResultSet rs = callSt.executeQuery();
+            while (rs.next()) {
+                String id = rs.getString("CustomerID");
+                String customerName = rs.getString("CustomerName");
+                String phoneNumber = rs.getString("PhoneNumber");
+                String customerAddress = rs.getString("CustomerAddress");
+                String customerCompanyAddress = rs.getString("CustomerCompanyAddress");
+                Object[] row = {id, customerName, phoneNumber, customerAddress, customerCompanyAddress};
+                customerModel.addRow(row);
+            }
+            tbCustomer.setModel(customerModel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_txtSearchCustomerKeyReleased
 
     /**
      * @param args the command line arguments
@@ -170,7 +232,7 @@ public class CustomerDetail extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private static javax.swing.JTable tbCustomer;
+    private javax.swing.JTextField txtSearchCustomer;
     // End of variables declaration//GEN-END:variables
 }

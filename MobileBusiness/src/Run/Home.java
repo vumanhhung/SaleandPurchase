@@ -228,7 +228,7 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerActionPerformed
-        StockDetail cd = new StockDetail();
+        CustomerDetail cd = new CustomerDetail();
         cd.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCustomerActionPerformed
@@ -332,6 +332,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton btnSuppllier;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lbUsername;
+    public static javax.swing.JLabel lbUsername;
     // End of variables declaration//GEN-END:variables
 }
