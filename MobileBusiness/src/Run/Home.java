@@ -40,6 +40,7 @@ public class Home extends javax.swing.JFrame {
         btnChangePass = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
         lbUsername = new javax.swing.JLabel();
+        btnRegister = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -144,6 +145,15 @@ public class Home extends javax.swing.JFrame {
         lbUsername.setForeground(new java.awt.Color(0, 0, 204));
         lbUsername.setText("username");
 
+        btnRegister.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btnRegister.setText("Register");
+        btnRegister.setOpaque(false);
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -156,9 +166,6 @@ public class Home extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lbUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnLogout))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnSale, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -167,9 +174,6 @@ public class Home extends javax.swing.JFrame {
                         .addComponent(btnReport, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(204, 204, 204)
-                                .addComponent(btnChangePass, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnCustomer)
                                 .addGap(18, 18, 18)
@@ -181,7 +185,16 @@ public class Home extends javax.swing.JFrame {
                                 .addComponent(btnStock, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(28, 28, 28)
                                 .addComponent(btnItem, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnLogout, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(btnChangePass, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(93, 93, 93)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -206,7 +219,9 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(btnSale)
                     .addComponent(btnPurchase))
                 .addGap(18, 18, 18)
-                .addComponent(btnChangePass)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnChangePass)
+                    .addComponent(btnRegister))
                 .addGap(44, 44, 44)
                 .addComponent(btnLogout)
                 .addContainerGap())
@@ -227,47 +242,11 @@ public class Home extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerActionPerformed
-        CustomerDetail cd = new CustomerDetail();
-        cd.setVisible(true);
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        Login login = new Login();
+        login.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnCustomerActionPerformed
-
-    private void btnEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmployeeActionPerformed
-        EmployeeDetail ed = new EmployeeDetail();
-        ed.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnEmployeeActionPerformed
-
-    private void btnStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStockActionPerformed
-        StockDetail sd = new StockDetail();
-        sd.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnStockActionPerformed
-
-    private void btnItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnItemActionPerformed
-        ItemDetail id = new ItemDetail();
-        id.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnItemActionPerformed
-
-    private void btnSuppllierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuppllierActionPerformed
-        SupplierDetail sd = new SupplierDetail();
-        sd.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnSuppllierActionPerformed
-
-    private void btnSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSaleActionPerformed
-
-    private void btnPurchaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPurchaseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnPurchaseActionPerformed
-
-    private void btnReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnReportActionPerformed
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnChangePassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePassActionPerformed
         ChangePassword cp = new ChangePassword();
@@ -275,11 +254,53 @@ public class Home extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnChangePassActionPerformed
 
-    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        Login login = new Login();
-        login.setVisible(true);
+    private void btnReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReportActionPerformed
+
+    private void btnPurchaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPurchaseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPurchaseActionPerformed
+
+    private void btnSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSaleActionPerformed
+
+    private void btnSuppllierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuppllierActionPerformed
+        SupplierDetail sd = new SupplierDetail();
+        sd.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnLogoutActionPerformed
+    }//GEN-LAST:event_btnSuppllierActionPerformed
+
+    private void btnItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnItemActionPerformed
+        ItemDetail id = new ItemDetail();
+        id.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnItemActionPerformed
+
+    private void btnStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStockActionPerformed
+        StockDetail sd = new StockDetail();
+        sd.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnStockActionPerformed
+
+    private void btnEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmployeeActionPerformed
+        EmployeeDetail ed = new EmployeeDetail();
+        ed.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnEmployeeActionPerformed
+
+    private void btnCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerActionPerformed
+        CustomerDetail cd = new CustomerDetail();
+        cd.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnCustomerActionPerformed
+
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        Register rg = new Register();
+        rg.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRegisterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -326,6 +347,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton btnItem;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPurchase;
+    private javax.swing.JButton btnRegister;
     private javax.swing.JButton btnReport;
     private javax.swing.JButton btnSale;
     private javax.swing.JButton btnStock;

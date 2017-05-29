@@ -46,7 +46,7 @@ public class Login extends javax.swing.JFrame {
 
         lbLogin.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         lbLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbLogin.setText("Library Management");
+        lbLogin.setText("Bussiness Management");
         lbLogin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         password.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -99,9 +99,9 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(password)
                     .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
+                .addGap(40, 40, 40)
                 .addComponent(btnLogin)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         pack();

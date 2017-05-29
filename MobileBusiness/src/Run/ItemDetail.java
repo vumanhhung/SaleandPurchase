@@ -38,7 +38,7 @@ public class ItemDetail extends javax.swing.JFrame {
                 String mobiName = rs.getString("mobiName");
                 String supName = rs.getString("supName");
                 String color = rs.getString("color");
-                String size = rs.getString("size");
+                String size = rs.getString("screenSize");
                 String price = rs.getString("price");
                 String guarantee = rs.getString("guarantee");
                 Object[] row = {mobiName, supName, color, size, price, guarantee + " year"};
@@ -168,7 +168,7 @@ public class ItemDetail extends javax.swing.JFrame {
                 String mobiName = rs.getString("mobiName");
                 String supName = rs.getString("supName");
                 String color = rs.getString("color");
-                String size = rs.getString("size");
+                String size = rs.getString("screenSize");
                 String price = rs.getString("price");
                 String guarantee = rs.getString("guarantee");
                 Object[] row = {mobiName, supName, color, size, price, guarantee + " year"};
