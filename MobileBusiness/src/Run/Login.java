@@ -132,6 +132,7 @@ public class Login extends javax.swing.JFrame {
                         Home home = new Home();
                         home.setVisible(true);
                         lbUsername.setText("Hello, " + username);
+                        home.employeeCode = rs.getString("employeeCode");
                     }else{
                         JOptionPane.showMessageDialog(null, "Username or password is incorrect");
                     }

@@ -15,6 +15,10 @@ dateOfJoin date,
 [role] int
 )
 
+select * from Employee where employeeCode = '12345' and [password] = 'admin'
+
+select * from Employee
+
 create table Supplier(
 supID varchar(10) primary key,
 supName varchar(50),
@@ -42,16 +46,21 @@ guarantee int,
 stock int
 )
 
-create table Sales(
-saleID varchar(10) primary key,
-CustomerID varchar(10) foreign key references Customer(CustomerID),
-employeeCode varchar(5) foreign key references Employee(EmployeeCode),
-mobiID varchar(10) foreign key references Items(mobiID),
-quantity int,
-saleOff int,
-Buydate date,
-GuaranteeDate date,
-buyQuantity int 
+create table Purchase(
+	purchaseID varchar(10) primary key,
+	customerID varchar(10) foreign key references Customer(CustomerID),
+	employeeCode varchar(5) foreign key references Employee(EmployeeCode),
+	buydate date,
+	totalPrice int
+)
+
+create table PurchaseDetail(
+	purchaseID varchar(10) primary key foreign key references Purchase(purchaseID),
+	mobiID varchar(10) foreign key references Items(mobiID),
+	quantity int,
+	saleOff int,
+	uniPrice int,
+	guarantee int
 )
 
 INSERT INTO Employee([employeeCode],[userName],[password],[employeeName],[phoneNumber],[Address],[salary],[dateOfJoin],[role]) VALUES('94501','Lillith','LVS97BHV9CB','Aline S. Buckley','09245923814','725-4477 Diam Road',459,'05/26/16',1),('89271','Patience','HGX17GFA4AA','Melyssa Dalton','09624842841','Ap #364-5806 Ut Rd.',110,'08/03/15',0),('81625','Priscilla','XKG42OYQ5DP','Cameron Davidson','09643586245','Ap #149-4927 Vitae, Road',240,'05/15/13',0),('64487','Aspen','VCG78TLQ1OO','Willa Travis','09642857242','Ap #453-1100 Et, Ave',112,'10/05/14',1),('63343','Jonas','CCK04DKF8RP','Kieran B. Donaldson','09394481489','6937 Velit. Av.',315,'04/13/13',1),('24478','Ivory','CFF05IBV7FH','Brady Morgan','09423266526','P.O. Box 919, 1826 Aliquet St.',241,'11/25/11',0),('14702','Thomas','NPP54XUV0NL','Kadeem Parsons','09692937964','154-1480 Scelerisque Road',452,'06/18/13',1),('38794','Sebastian','VTB77CTE7JN','Armand Oneill','09458924242','323-2720 Magna Rd.',287,'02/07/11',0),('22037','Fatima','BKL30FWV4RT','Kenneth E. Holman','09521554837','1830 Sed St.',338,'11/29/11',0),('36285','Yoko','YVB39XIY1HA','Jennifer Haynes','09781752555','5130 Adipiscing Av.',127,'10/07/12',0);
@@ -74,8 +83,10 @@ create procedure signIn(
 	@username varchar(25)
 )as
 begin
-select * from Account where username = @username
+select * from Employee where username = @username
 end
+
+drop procedure signIn
 
 create procedure getAllItems
 as

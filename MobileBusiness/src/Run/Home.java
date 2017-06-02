@@ -10,7 +10,7 @@ package Run;
  * @author VuManh
  */
 public class Home extends javax.swing.JFrame {
-
+    public static String employeeCode;
     /**
      * Creates new form Home1
      */
@@ -250,7 +250,9 @@ public class Home extends javax.swing.JFrame {
 
     private void btnChangePassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePassActionPerformed
         ChangePassword cp = new ChangePassword();
+        //cp.txtUsername = 
         cp.setVisible(true);
+        cp.employeeCode = employeeCode;
         this.dispose();
     }//GEN-LAST:event_btnChangePassActionPerformed
 
@@ -287,7 +289,7 @@ public class Home extends javax.swing.JFrame {
     private void btnEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmployeeActionPerformed
         EmployeeDetail ed = new EmployeeDetail();
         ed.setVisible(true);
-        this.dispose();
+        //this.dispose();
     }//GEN-LAST:event_btnEmployeeActionPerformed
 
     private void btnCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerActionPerformed

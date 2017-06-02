@@ -62,9 +62,9 @@ public class ItemDetail extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbItems = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
         txtSearchItem = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        btnSearchItem = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -90,9 +90,6 @@ public class ItemDetail extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbItems);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Search");
-
         txtSearchItem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtSearchItemKeyReleased(evt);
@@ -107,6 +104,13 @@ public class ItemDetail extends javax.swing.JFrame {
             }
         });
 
+        btnSearchItem.setText("Search");
+        btnSearchItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchItemActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -114,8 +118,8 @@ public class ItemDetail extends javax.swing.JFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
+                .addComponent(btnSearchItem)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtSearchItem, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
             .addGroup(layout.createSequentialGroup()
@@ -133,11 +137,11 @@ public class ItemDetail extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtSearchItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                    .addComponent(txtSearchItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearchItem))
+                .addGap(21, 21, 21)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
@@ -156,6 +160,10 @@ public class ItemDetail extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtSearchItemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchItemKeyReleased
+       
+    }//GEN-LAST:event_txtSearchItemKeyReleased
+
+    private void btnSearchItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchItemActionPerformed
         String searchText = txtSearchItem.getText();
        itemModel.setRowCount(0);
         try {
@@ -178,7 +186,7 @@ public class ItemDetail extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_txtSearchItemKeyReleased
+    }//GEN-LAST:event_btnSearchItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -217,9 +225,9 @@ public class ItemDetail extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSearchItem;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private static javax.swing.JTable tbItems;
     private javax.swing.JTextField txtSearchItem;

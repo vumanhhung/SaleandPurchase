@@ -6,6 +6,7 @@
 package Run;
 
 import GetConnect.MyConnect;
+import static Run.EmployeeDetail.employeeModel;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,35 +17,35 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author monki
  */
-public class EmployeeDetail extends javax.swing.JFrame {
-    static DefaultTableModel employeeModel;
+public class ReportPurchase extends javax.swing.JFrame {
+static DefaultTableModel purchaseModel;
     /**
-     * Creates new form CustomerDetail
+     * Creates new form ReportPurchase
      */
-    public EmployeeDetail() {
+    public ReportPurchase() {
         initComponents();
-        employeeModel = (DefaultTableModel) tbEmployee.getModel();
+        employeeModel = (DefaultTableModel) tblReport.getModel();
         loadData();
     }
     
-     public static void loadData() {
+    public static void loadData() {
         employeeModel.setRowCount(0);
         try {
             Connection conn = MyConnect.getConnection();
             //CallableStatement callSt = conn.prepareCall("{call getAllBook()}");
-            PreparedStatement ps = conn.prepareStatement("select * from Employee");
+            PreparedStatement ps = conn.prepareStatement("select * from Purchase");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                String id = rs.getString("employeeCode");
-                String employeeName = rs.getString("employeeName");
-                String phoneNumber = rs.getString("phoneNumber");
-                String address = rs.getString("Address");
-                String salary = rs.getString("salary");
-                String dateOfJoin = rs.getString("dateOfJoin");
-                Object[] row = {id, employeeName, phoneNumber, address, salary, dateOfJoin};
-                employeeModel.addRow(row);
+//                String id = rs.getString("purchaseID");
+//                String employeeName = rs.getString("customer");
+//                String phoneNumber = rs.getString("phoneNumber");
+//                String address = rs.getString("Address");
+//                String salary = rs.getString("salary");
+//                String dateOfJoin = rs.getString("dateOfJoin");
+//                Object[] row = {id, employeeName, phoneNumber, address, salary, dateOfJoin};
+//                employeeModel.addRow(row);
             }
-            tbEmployee.setModel(employeeModel);
+            tblReport.setModel(employeeModel);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -60,41 +61,16 @@ public class EmployeeDetail extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbEmployee = new javax.swing.JTable();
-        txtSearchEmployee = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
+        txtSearchEmployee = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblReport = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel1.setText("Employee Detail");
-
-        tbEmployee.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "Name", "Phone Number", "Address", "Date of joining", "Salary", "Salary Infor"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tbEmployee);
-
-        txtSearchEmployee.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtSearchEmployeeKeyReleased(evt);
-            }
-        });
+        jLabel1.setText("Purchase Report");
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Home");
@@ -105,17 +81,36 @@ public class EmployeeDetail extends javax.swing.JFrame {
         });
 
         btnSearch.setText("Search");
-        btnSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchActionPerformed(evt);
+
+        txtSearchEmployee.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchEmployeeKeyReleased(evt);
             }
         });
+
+        tblReport.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Purchase ID", "Customer", "Employee Name", "Buy Date", "Total Price"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblReport);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 782, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSearch)
@@ -149,31 +144,26 @@ public class EmployeeDetail extends javax.swing.JFrame {
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-//        Home home = new Home();
-//        home.setVisible(true);
+        Home home = new Home();
+        home.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtSearchEmployeeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchEmployeeKeyReleased
-       
-    }//GEN-LAST:event_txtSearchEmployeeKeyReleased
-
-    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-         String searchText = txtSearchEmployee.getText();
-       employeeModel.setRowCount(0);
+        String searchText = txtSearchEmployee.getText();
+        tblReport.setRowCount(0);
         try {
             Connection conn = MyConnect.getConnection();
-            CallableStatement callSt = conn.prepareCall("{call searchEmployee(?)}"); 
+            CallableStatement callSt = conn.prepareCall("{call searchEmployee(?)}");
             callSt.setString(1, searchText);
             //PreparedStatement ps = conn.prepareStatement("select * from Employee");
             ResultSet rs = callSt.executeQuery();
             while (rs.next()) {
-                String id = rs.getString("employeeCode");
+                String id = rs.getString("employeeID");
                 String employeeName = rs.getString("employeeName");
                 String phoneNumber = rs.getString("phoneNumber");
                 String address = rs.getString("Address");
@@ -182,11 +172,11 @@ public class EmployeeDetail extends javax.swing.JFrame {
                 Object[] row = {id, employeeName, phoneNumber, address, salary, dateOfJoin};
                 employeeModel.addRow(row);
             }
-            tbEmployee.setModel(employeeModel);
+            tblReport.setModel(employeeModel);
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_btnSearchActionPerformed
+    }//GEN-LAST:event_txtSearchEmployeeKeyReleased
 
     /**
      * @param args the command line arguments
@@ -205,21 +195,20 @@ public class EmployeeDetail extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EmployeeDetail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReportPurchase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EmployeeDetail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReportPurchase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EmployeeDetail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReportPurchase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EmployeeDetail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReportPurchase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EmployeeDetail().setVisible(true);
+                new ReportPurchase().setVisible(true);
             }
         });
     }
@@ -229,7 +218,7 @@ public class EmployeeDetail extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private static javax.swing.JTable tbEmployee;
+    private static javax.swing.JTable tblReport;
     private javax.swing.JTextField txtSearchEmployee;
     // End of variables declaration//GEN-END:variables
 }
