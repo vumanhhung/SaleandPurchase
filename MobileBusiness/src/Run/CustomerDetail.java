@@ -66,6 +66,8 @@ public class CustomerDetail extends javax.swing.JFrame {
         btnHome = new javax.swing.JButton();
         btnSearchCustomer = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
+        btnDel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -119,10 +121,26 @@ public class CustomerDetail extends javax.swing.JFrame {
         });
 
         btnAdd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnAdd.setText("Add New Customer");
+        btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
+            }
+        });
+
+        btnEdit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
+
+        btnDel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnDel.setText("Delete");
+        btnDel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelActionPerformed(evt);
             }
         });
 
@@ -138,16 +156,20 @@ public class CustomerDetail extends javax.swing.JFrame {
                 .addComponent(txtSearchCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
             .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(223, 223, 223)
-                        .addComponent(btnHome)
-                        .addGap(153, 153, 153)
-                        .addComponent(btnAdd))
+                        .addComponent(jLabel1)
+                        .addContainerGap(492, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jLabel1)))
-                .addContainerGap(180, Short.MAX_VALUE))
+                        .addComponent(btnAdd)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEdit)
+                        .addGap(205, 205, 205)
+                        .addComponent(btnHome)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDel)
+                        .addGap(38, 38, 38))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,7 +185,9 @@ public class CustomerDetail extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnHome)
-                    .addComponent(btnAdd))
+                    .addComponent(btnAdd)
+                    .addComponent(btnEdit)
+                    .addComponent(btnDel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -210,6 +234,14 @@ public class CustomerDetail extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnAddActionPerformed
 
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDelActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -254,6 +286,8 @@ public class CustomerDetail extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnDel;
+    private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnSearchCustomer;
     private javax.swing.JLabel jLabel1;

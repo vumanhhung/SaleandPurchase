@@ -25,6 +25,7 @@ public class Register extends javax.swing.JFrame {
 
     DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
     Date date = new Date();
+    
     String phone_valid = "0([0-9]{9,11})";
     Pattern p = Pattern.compile(phone_valid);
     Matcher m;
