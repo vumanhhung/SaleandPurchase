@@ -15,20 +15,28 @@ dateOfJoin date,
 [role] int
 )
 
-select * from Employee where employeeCode = '12345' and [password] = 'admin'
+select * from Employee where userName = 'admin' and [password] = 'admin'
+
+select [password] from Employee where employeeCode = 12345
+
+update Employee set [password] = 'admin' where employeeCode = 12345
+delete Employee where userName = ''
 
 select * from Employee
 
 create table Supplier(
-supID varchar(10) primary key,
+supID int identity primary key,
 supName varchar(50),
 [Address] varchar(20),
 phoneNumber varchar(12),
 typeOfMobile varchar(50)
 )
 
+select * from Supplier
+select * from Customer
+
 create table Customer(
-CustomerID varchar(10) primary key,
+CustomerID int identity primary key,
 CustomerName varchar(50),
 PhoneNumber varchar(12),
 CustomerAddress varchar(100),
@@ -36,9 +44,9 @@ CustomerCompanyAddress varchar(100)
 )
 
 create table Items(
-mobiID varchar(10) primary key,
+mobiID int identity primary key,
 mobiName varchar(50),
-supID varchar(10) foreign key references Supplier(supID),
+supID int foreign key references Supplier(supID),
 color varchar(20),
 screenSize float,
 price varchar(20),
@@ -47,16 +55,16 @@ stock int
 )
 
 create table Purchase(
-	purchaseID varchar(10) primary key,
-	customerID varchar(10) foreign key references Customer(CustomerID),
+	purchaseID int identity primary key,
+	customerID int foreign key references Customer(CustomerID),
 	employeeCode varchar(5) foreign key references Employee(EmployeeCode),
 	buydate date,
 	totalPrice int
 )
 
 create table PurchaseDetail(
-	purchaseID varchar(10) primary key foreign key references Purchase(purchaseID),
-	mobiID varchar(10) foreign key references Items(mobiID),
+	purchaseID int primary key foreign key references Purchase(purchaseID),
+	mobiID int foreign key references Items(mobiID),
 	quantity int,
 	saleOff int,
 	uniPrice int,
@@ -68,15 +76,15 @@ INSERT INTO Employee([employeeCode],[userName],[password],[employeeName],[phoneN
 INSERT INTO Employee VALUES('12345','admin','admin','Aline S. Buckley','09245923814','725-4477 Diam Road',459,'05/26/16',1)
 select * from Employee
 
-Insert into Supplier values(1, 'Samsung', 'Korea', '0123456789', 'Landline')
-Insert into Supplier values(2, 'Appple', 'USA', '0123456780', 'Mobile')
-Insert into Supplier values(3, 'HTC', 'USA', '0123456780', 'Mobile')
+Insert into Supplier values('Samsung', 'Korea', '0123456789', 'Android')
+Insert into Supplier values('Appple', 'USA', '0123456780', 'IOS')
+Insert into Supplier values('HTC', 'USA', '0123456780', 'Android')
 
-insert into Items values (1, 'Samsung Galaxy S7', 1, 'Black', 123, '123', 1, 100)
-insert into Items values (2, 'Apple IPhone 7', 2, 'Black', 123, '123', 1, 100)
-insert into Items values (3, 'HTC Phone', 3, 'Black', 123, '123', 1, 100)
+insert into Items values ('Samsung Galaxy S7', 1, 'Black', 123, '123', 1, 100)
+insert into Items values ('Apple IPhone 7', 2, 'Black', 123, '123', 1, 100)
+insert into Items values ('HTC Phone', 3, 'Black', 123, '123', 1, 100)
 
-INSERT INTO Customer([CustomerID],[CustomerName],[PhoneNumber],[CustomerAddress],[CustomerCompanyAddress]) VALUES(1,'Kendall','09971281126','P.O. Box 678, 8189 Vestibulum Ave','4081 Egestas. St.'),(2,'Erica','09415464424','P.O. Box 176, 4981 Risus St.','Ap #920-6719 Non Av.'),(3,'Hannah','09857293796','P.O. Box 256, 1082 Mi Road','P.O. Box 281, 5183 Tempor Rd.'),(4,'Oren','09216494838','Ap #693-7351 Vulputate St.','9931 Vel Av.'),(5,'Brynn','09148226619','7274 Nonummy Rd.','789-2018 Vel Rd.'),(6,'Harlan','09262959715','P.O. Box 745, 5432 Lectus Road','4083 Dui. Rd.'),(7,'Kasper','09946465277','P.O. Box 609, 3762 Sed Ave','8764 Et, Avenue'),(8,'Jordan','09839736275','412-9276 Eros St.','P.O. Box 731, 1538 Sed Av.'),(9,'Hedy','09243435392','P.O. Box 941, 8409 Vivamus Avenue','P.O. Box 595, 9332 Quam Av.'),(10,'Stella','09645898125','P.O. Box 975, 5747 Dui Street','P.O. Box 239, 7236 Lorem St.');
+INSERT INTO Customer VALUES('Kendall','09971281126','P.O. Box 678, 8189 Vestibulum Ave','4081 Egestas. St.'),('Erica','09415464424','P.O. Box 176, 4981 Risus St.','Ap #920-6719 Non Av.'),('Hannah','09857293796','P.O. Box 256, 1082 Mi Road','P.O. Box 281, 5183 Tempor Rd.'),('Oren','09216494838','Ap #693-7351 Vulputate St.','9931 Vel Av.'),('Brynn','09148226619','7274 Nonummy Rd.','789-2018 Vel Rd.'),('Harlan','09262959715','P.O. Box 745, 5432 Lectus Road','4083 Dui. Rd.'),('Kasper','09946465277','P.O. Box 609, 3762 Sed Ave','8764 Et, Avenue'),('Jordan','09839736275','412-9276 Eros St.','P.O. Box 731, 1538 Sed Av.'),('Hedy','09243435392','P.O. Box 941, 8409 Vivamus Avenue','P.O. Box 595, 9332 Quam Av.'),('Stella','09645898125','P.O. Box 975, 5747 Dui Street','P.O. Box 239, 7236 Lorem St.');
 
 
 create procedure signIn(

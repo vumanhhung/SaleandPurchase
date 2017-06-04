@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ItemDetail extends javax.swing.JFrame {
     static DefaultTableModel itemModel;
+    public static Home home;
     /**
      * Creates new form CustomerDetail  
      */
@@ -154,7 +155,6 @@ public class ItemDetail extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Home home = new Home();
         home.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed

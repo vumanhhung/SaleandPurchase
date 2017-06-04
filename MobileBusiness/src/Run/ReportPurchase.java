@@ -155,7 +155,7 @@ static DefaultTableModel purchaseModel;
 
     private void txtSearchEmployeeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchEmployeeKeyReleased
         String searchText = txtSearchEmployee.getText();
-        tblReport.setRowCount(0);
+//        tblReport.setRowCount(0);
         try {
             Connection conn = MyConnect.getConnection();
             CallableStatement callSt = conn.prepareCall("{call searchEmployee(?)}");

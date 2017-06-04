@@ -5,17 +5,39 @@
  */
 package Run;
 
+import GetConnect.MyConnect;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+import org.apache.commons.lang3.RandomStringUtils;
+
 /**
  *
  * @author monki
  */
 public class Register extends javax.swing.JFrame {
 
+    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    Date date = new Date();
+    String phone_valid = "0([0-9]{9,11})";
+    Pattern p = Pattern.compile(phone_valid);
+    Matcher m;
+
+    public static Home home;
+
     /**
      * Creates new form Register
      */
     public Register() {
         initComponents();
+        txtEmpCode.setText(RandomStringUtils.randomAlphanumeric(5).toUpperCase());
+        txtDOJ.setText(dateFormat.format(date));
     }
 
     /**
@@ -46,6 +68,8 @@ public class Register extends javax.swing.JFrame {
         txtAddress = new javax.swing.JTextField();
         txtSalary = new javax.swing.JTextField();
         txtDOJ = new javax.swing.JTextField();
+        txtPhone = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
         btnRegister = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
 
@@ -126,6 +150,7 @@ public class Register extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Salary");
 
+        txtEmpCode.setEditable(false);
         txtEmpCode.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         txtEmpName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -134,7 +159,13 @@ public class Register extends javax.swing.JFrame {
 
         txtSalary.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
+        txtDOJ.setEditable(false);
         txtDOJ.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        txtPhone.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel9.setText("Phone Number");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -147,15 +178,17 @@ public class Register extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel9))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtEmpCode)
-                    .addComponent(txtEmpName)
-                    .addComponent(txtAddress)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
                     .addComponent(txtSalary)
+                    .addComponent(txtAddress, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtEmpName, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtEmpCode, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtDOJ))
-                .addGap(146, 146, 146))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,6 +201,10 @@ public class Register extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtEmpName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -180,45 +217,55 @@ public class Register extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
                     .addComponent(txtDOJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         btnRegister.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnRegister.setText("Register");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
 
         btnCancel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lbLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(120, 120, 120)
-                .addComponent(btnRegister)
-                .addGap(137, 137, 137)
-                .addComponent(btnCancel)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(120, 120, 120)
+                        .addComponent(btnRegister)
+                        .addGap(137, 137, 137)
+                        .addComponent(btnCancel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lbLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(lbLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(29, 29, 29)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(33, 33, 33)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegister)
                     .addComponent(btnCancel))
@@ -228,6 +275,61 @@ public class Register extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        String txtUsername = txtUserName.getText();
+        String txtPassword = new String(txtPass.getPassword());
+        String txtCfPassword = new String(txtCfPass.getPassword());
+
+        String txtEmployeeCode = txtEmpCode.getText();
+        String txtEmployeeName = txtEmpName.getText();
+        String txtPhoneNumber = txtPhone.getText();
+        String txtEmployeeAddress = txtAddress.getText();
+        String txtEmployeeSalary = txtSalary.getText();
+        String txtEmployeeDOJ = txtDOJ.getText();
+        m = p.matcher(txtPhoneNumber);
+        try {
+            Connection conn = MyConnect.getConnection();
+            PreparedStatement ps1 = conn.prepareStatement("select * from Employee where userName = ?");
+            ps1.setString(1, txtUsername);
+            ResultSet rs = ps1.executeQuery();
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Username existed");
+            } else {
+                if (!txtPassword.equals(txtCfPassword)) {
+                    JOptionPane.showMessageDialog(null, "Password does not match");
+                } else if (!m.matches()) {
+                    JOptionPane.showMessageDialog(null, "Invalid phone number!");
+                    txtPhone.setText("");
+                } else {
+                    PreparedStatement ps = conn.prepareStatement("INSERT INTO Employee VALUES(?,?,?,?,?,?,?,?,?)");
+                    ps.setString(1, txtEmployeeCode);
+                    ps.setString(2, txtUsername);
+                    ps.setString(3, txtPassword);
+                    ps.setString(4, txtEmployeeName);
+                    ps.setString(5, txtPhoneNumber);
+                    ps.setString(6, txtEmployeeAddress);
+                    ps.setString(7, txtEmployeeSalary);
+                    ps.setString(8, txtEmployeeDOJ);
+                    ps.setString(9, "0");
+                    ps.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "Register employee successfully");
+                    home.setVisible(true);
+                    this.dispose();
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }//GEN-LAST:event_btnRegisterActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here:
+        home.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -275,6 +377,7 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbLogin;
@@ -284,6 +387,7 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JTextField txtEmpCode;
     private javax.swing.JTextField txtEmpName;
     private javax.swing.JPasswordField txtPass;
+    private javax.swing.JTextField txtPhone;
     private javax.swing.JTextField txtSalary;
     private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables

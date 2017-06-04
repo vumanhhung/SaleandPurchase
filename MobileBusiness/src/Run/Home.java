@@ -13,7 +13,6 @@ public class Home extends javax.swing.JFrame {
 
     public static String employeeCode;
     public static String employeeName;
-
     /**
      * Creates new form Home1
      */
@@ -74,6 +73,7 @@ public class Home extends javax.swing.JFrame {
 
         btnStock.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnStock.setText("Stock Detail");
+        btnStock.setEnabled(false);
         btnStock.setOpaque(false);
         btnStock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,6 +101,7 @@ public class Home extends javax.swing.JFrame {
 
         btnSale.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnSale.setText("Sale Detail");
+        btnSale.setEnabled(false);
         btnSale.setOpaque(false);
         btnSale.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,6 +111,7 @@ public class Home extends javax.swing.JFrame {
 
         btnPurchase.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnPurchase.setText("Purchase Detail");
+        btnPurchase.setEnabled(false);
         btnPurchase.setOpaque(false);
         btnPurchase.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,6 +121,7 @@ public class Home extends javax.swing.JFrame {
 
         btnReport.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnReport.setText("Report");
+        btnReport.setEnabled(false);
         btnReport.setOpaque(false);
         btnReport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,7 +170,7 @@ public class Home extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnSale, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnPurchase, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+                        .addComponent(btnPurchase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(btnReport, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -196,9 +199,9 @@ public class Home extends javax.swing.JFrame {
                                         .addGap(33, 33, 33)
                                         .addComponent(jLabel2)))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnSuppllier, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                                    .addComponent(lbUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnSuppllier, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbUsername, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -206,7 +209,7 @@ public class Home extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(lbUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
@@ -259,55 +262,71 @@ public class Home extends javax.swing.JFrame {
         cp.employeeCode = employeeCode;
         cp.txtUsername.setText(employeeName);
         cp.setVisible(true);
-
+        cp.home = this;
+        this.setVisible(false);
         //this.dispose();
     }//GEN-LAST:event_btnChangePassActionPerformed
 
     private void btnReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportActionPerformed
         // TODO add your handling code here:
+//        ReportPurchase rp = new ReportPurchase();
+//        rp.setVisible(true);
+//        rp.home = this;
+//        this.dispose();
     }//GEN-LAST:event_btnReportActionPerformed
 
     private void btnPurchaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPurchaseActionPerformed
         // TODO add your handling code here:
+//        PurchaseDetail pd = new PurchaseDetail();
+//        pd.setVisible(true);
+//        pd.home = this;
+//        this.dispose();
     }//GEN-LAST:event_btnPurchaseActionPerformed
 
     private void btnSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaleActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnSaleActionPerformed
 
     private void btnSuppllierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuppllierActionPerformed
         SupplierDetail sd = new SupplierDetail();
         sd.setVisible(true);
+        sd.home = this;
         this.dispose();
     }//GEN-LAST:event_btnSuppllierActionPerformed
 
     private void btnItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnItemActionPerformed
         ItemDetail id = new ItemDetail();
         id.setVisible(true);
+        id.home = this;
         this.dispose();
     }//GEN-LAST:event_btnItemActionPerformed
 
     private void btnStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStockActionPerformed
-        StockDetail sd = new StockDetail();
-        sd.setVisible(true);
-        this.dispose();
+//        StockDetail sd = new StockDetail();
+//        sd.setVisible(true);
+//        sd.home = this;
+//        this.dispose();
     }//GEN-LAST:event_btnStockActionPerformed
 
     private void btnEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmployeeActionPerformed
         EmployeeDetail ed = new EmployeeDetail();
         ed.setVisible(true);
-        //this.dispose();
+        ed.home = this;
+        this.dispose();
     }//GEN-LAST:event_btnEmployeeActionPerformed
 
     private void btnCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerActionPerformed
         CustomerDetail cd = new CustomerDetail();
         cd.setVisible(true);
+        cd.home = this;
         this.dispose();
     }//GEN-LAST:event_btnCustomerActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         Register rg = new Register();
         rg.setVisible(true);
+        rg.home = this;
         this.dispose();
     }//GEN-LAST:event_btnRegisterActionPerformed
 

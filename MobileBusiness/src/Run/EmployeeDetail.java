@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class EmployeeDetail extends javax.swing.JFrame {
     static DefaultTableModel employeeModel;
+    public static Home home;
     /**
      * Creates new form CustomerDetail
      */
@@ -153,9 +154,7 @@ public class EmployeeDetail extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-//        Home home = new Home();
-//        home.setVisible(true);
+        home.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
