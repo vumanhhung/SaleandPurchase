@@ -43,6 +43,12 @@ CustomerAddress varchar(100),
 CustomerCompanyAddress varchar(100)
 )
 
+select * from Customer where CustomerID = 11
+
+update Customer set CustomerName = 'hung beo', PhoneNumber = '123456789', CustomerAddress = 'gam cau', CustomerCompanyAddress='gam cau' where CustomerID = 11
+
+INSERT INTO Customer VALUES('hung', '0123455678', 'hanoi', 'hanoi')
+
 create table Items(
 mobiID int identity primary key,
 mobiName varchar(50),
@@ -53,6 +59,10 @@ price varchar(20),
 guarantee int,
 stock int
 )
+
+select * from Items
+
+update Items set mobiName = 'Xperia Z1', supID = 2, color = 'abc', screenSize = 123, price = 123, guarantee = 1, stock = 1 where mobiID = 5
 
 create table Purchase(
 	purchaseID int identity primary key,
@@ -74,7 +84,7 @@ create table PurchaseDetail(
 INSERT INTO Employee([employeeCode],[userName],[password],[employeeName],[phoneNumber],[Address],[salary],[dateOfJoin],[role]) VALUES('94501','Lillith','LVS97BHV9CB','Aline S. Buckley','09245923814','725-4477 Diam Road',459,'05/26/16',1),('89271','Patience','HGX17GFA4AA','Melyssa Dalton','09624842841','Ap #364-5806 Ut Rd.',110,'08/03/15',0),('81625','Priscilla','XKG42OYQ5DP','Cameron Davidson','09643586245','Ap #149-4927 Vitae, Road',240,'05/15/13',0),('64487','Aspen','VCG78TLQ1OO','Willa Travis','09642857242','Ap #453-1100 Et, Ave',112,'10/05/14',1),('63343','Jonas','CCK04DKF8RP','Kieran B. Donaldson','09394481489','6937 Velit. Av.',315,'04/13/13',1),('24478','Ivory','CFF05IBV7FH','Brady Morgan','09423266526','P.O. Box 919, 1826 Aliquet St.',241,'11/25/11',0),('14702','Thomas','NPP54XUV0NL','Kadeem Parsons','09692937964','154-1480 Scelerisque Road',452,'06/18/13',1),('38794','Sebastian','VTB77CTE7JN','Armand Oneill','09458924242','323-2720 Magna Rd.',287,'02/07/11',0),('22037','Fatima','BKL30FWV4RT','Kenneth E. Holman','09521554837','1830 Sed St.',338,'11/29/11',0),('36285','Yoko','YVB39XIY1HA','Jennifer Haynes','09781752555','5130 Adipiscing Av.',127,'10/07/12',0);
 
 INSERT INTO Employee VALUES('12345','admin','admin','Aline S. Buckley','09245923814','725-4477 Diam Road',459,'05/26/16',1)
-select * from Employee
+select * from Items
 
 Insert into Supplier values('Samsung', 'Korea', '0123456789', 'Android')
 Insert into Supplier values('Appple', 'USA', '0123456780', 'IOS')
@@ -99,7 +109,7 @@ drop procedure signIn
 create procedure getAllItems
 as
 begin
-SELECT        Items.mobiName, Supplier.supName, Items.color, Items.screenSize, Items.price, Items.guarantee
+SELECT        mobiID, Items.mobiName, Supplier.supName, Items.color, Items.screenSize, Items.price, Items.guarantee, stock
 FROM            Items INNER JOIN
                          Supplier ON Items.supID = Supplier.supID
 end
@@ -109,7 +119,7 @@ create procedure searchItems(
 )
 as
 begin
-SELECT        Items.mobiName, Supplier.supName, Items.color, Items.screenSize, Items.price, Items.guarantee
+SELECT        mobiID, Items.mobiName, Supplier.supName, Items.color, Items.screenSize, Items.price, Items.guarantee, stock
 FROM            Items INNER JOIN
                          Supplier ON Items.supID = Supplier.supID
 						 where Items.mobiName like '%' + @itemName + '%'

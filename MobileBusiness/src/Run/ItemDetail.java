@@ -6,10 +6,12 @@
 package Run;
 
 import GetConnect.MyConnect;
+import static Run.EditItem.cbSupllier;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,18 +19,21 @@ import javax.swing.table.DefaultTableModel;
  * @author monki
  */
 public class ItemDetail extends javax.swing.JFrame {
+
     static DefaultTableModel itemModel;
     public static Home home;
+    protected String itemID;
+
     /**
-     * Creates new form CustomerDetail  
+     * Creates new form CustomerDetail
      */
     public ItemDetail() {
         initComponents();
         itemModel = (DefaultTableModel) tbItems.getModel();
         loadData();
     }
-    
-       public static void loadData() {
+
+    public static void loadData() {
         itemModel.setRowCount(0);
         try {
             Connection conn = MyConnect.getConnection();
@@ -36,13 +41,15 @@ public class ItemDetail extends javax.swing.JFrame {
             //PreparedStatement ps = conn.prepareStatement("select * from Items");
             ResultSet rs = callSt.executeQuery();
             while (rs.next()) {
+                String itemID = rs.getString("mobiID");
                 String mobiName = rs.getString("mobiName");
                 String supName = rs.getString("supName");
                 String color = rs.getString("color");
                 String size = rs.getString("screenSize");
                 String price = rs.getString("price");
                 String guarantee = rs.getString("guarantee");
-                Object[] row = {mobiName, supName, color, size, price, guarantee + " year"};
+                int stock = rs.getInt("stock");
+                Object[] row = {itemID, mobiName, supName, color, size, price, guarantee + " year", stock};
                 itemModel.addRow(row);
             }
             tbItems.setModel(itemModel);
@@ -81,15 +88,20 @@ public class ItemDetail extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Item Name", "Supplier Name", "Color", "Screen Size ", "Price", "Guarantee", "Stock"
+                "Item ID", "Item Name", "Supplier Name", "Color", "Screen Size ", "Price", "Guarantee", "Stock"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tbItems.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbItemsMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tbItems);
@@ -197,12 +209,12 @@ public class ItemDetail extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtSearchItemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchItemKeyReleased
-       
+
     }//GEN-LAST:event_txtSearchItemKeyReleased
 
     private void btnSearchItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchItemActionPerformed
         String searchText = txtSearchItem.getText();
-       itemModel.setRowCount(0);
+        itemModel.setRowCount(0);
         try {
             Connection conn = MyConnect.getConnection();
             CallableStatement callSt = conn.prepareCall("{call searchItems(?)}");
@@ -210,13 +222,15 @@ public class ItemDetail extends javax.swing.JFrame {
             callSt.setString(1, searchText);
             ResultSet rs = callSt.executeQuery();
             while (rs.next()) {
+                String itemID = rs.getString("mobiID");
                 String mobiName = rs.getString("mobiName");
                 String supName = rs.getString("supName");
                 String color = rs.getString("color");
                 String size = rs.getString("screenSize");
                 String price = rs.getString("price");
                 String guarantee = rs.getString("guarantee");
-                Object[] row = {mobiName, supName, color, size, price, guarantee + " year"};
+                int stock = rs.getInt("stock");
+                Object[] row = {itemID, mobiName, supName, color, size, price, guarantee + " year", stock};
                 itemModel.addRow(row);
             }
             tbItems.setModel(itemModel);
@@ -232,7 +246,43 @@ public class ItemDetail extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // TODO add your handling code here:
+        EditItem ec = new EditItem();
+        try {
+            if (itemID == null) {
+                JOptionPane.showMessageDialog(null, "You must select an item to edit");
+            } else {
+                Connection conn = MyConnect.getConnection();
+                PreparedStatement ps = conn.prepareStatement("select * from Items where mobiID = ?");
+                ps.setString(1, itemID);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    ec.id = rs.getInt("mobiID");
+                    ec.txtItemName.setText(rs.getString("mobiName"));
+                    ec.txtColor.setText(rs.getString("color"));
+                    ec.txtSSize.setText(rs.getString("screenSize"));
+                    ec.txtPrice.setText(rs.getString("price"));
+                    ec.txtGuarantee.setText(rs.getString("guarantee"));
+                    ec.txtStock.setText(rs.getString("stock"));
+                }
+                try {
+                    PreparedStatement ps1 = conn.prepareStatement("select * from Supplier");
+                    ResultSet rs1 = ps1.executeQuery();
+                    while (rs1.next()) {
+                        SupplierItem item = new SupplierItem(rs1.getString("supName"), rs1.getInt("supID"));
+                        cbSupllier.addItem(item);
+                        if (rs1.getInt("supID") == rs.getInt("supID")) {
+                            cbSupllier.setSelectedItem(item);
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                ec.setVisible(true);
+                this.dispose();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
@@ -240,6 +290,12 @@ public class ItemDetail extends javax.swing.JFrame {
         ei.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnDelActionPerformed
+
+    private void tbItemsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbItemsMouseClicked
+        int index = tbItems.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) tbItems.getModel();
+        itemID = model.getValueAt(index, 0).toString();
+    }//GEN-LAST:event_tbItemsMouseClicked
 
     /**
      * @param args the command line arguments

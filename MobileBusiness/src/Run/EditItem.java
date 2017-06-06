@@ -5,11 +5,20 @@
  */
 package Run;
 
+import GetConnect.MyConnect;
+import static Run.AddItem.cbSupllier;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author monki
  */
 public class EditItem extends javax.swing.JFrame {
+
+    protected int id;
 
     /**
      * Creates new form EditItem
@@ -33,7 +42,6 @@ public class EditItem extends javax.swing.JFrame {
         lbStock = new javax.swing.JLabel();
         btnCancel = new javax.swing.JButton();
         txtItemName = new javax.swing.JTextField();
-        txtSup = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -44,6 +52,7 @@ public class EditItem extends javax.swing.JFrame {
         txtPrice = new javax.swing.JTextField();
         lbGuarantee = new javax.swing.JLabel();
         txtColor = new javax.swing.JTextField();
+        cbSupllier = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,8 +77,6 @@ public class EditItem extends javax.swing.JFrame {
         });
 
         txtItemName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        txtSup.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Color");
@@ -122,9 +129,9 @@ public class EditItem extends javax.swing.JFrame {
                                     .addComponent(jLabel4))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtSup)
                                     .addComponent(txtItemName)
-                                    .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbSupllier, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                     .addComponent(jLabel6)
@@ -163,7 +170,7 @@ public class EditItem extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(txtSup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbSupllier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -188,7 +195,7 @@ public class EditItem extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd)
                     .addComponent(btnCancel))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -203,7 +210,35 @@ public class EditItem extends javax.swing.JFrame {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        
+        String itemName = txtItemName.getText();
+        Object itemSupplier = cbSupllier.getSelectedItem();
+        int supplierName = ((SupplierItem) itemSupplier).getSupID();
+        String color = txtColor.getText();
+        String screen = txtSSize.getText();
+        String price = txtPrice.getText();
+        String guarantee = txtGuarantee.getText();
+        String stock = txtStock.getText();
+
+        try {
+            Connection conn = MyConnect.getConnection();
+            PreparedStatement ps = conn.prepareStatement("update Items set mobiName = ?, supID = ?, color = ?, "
+                    + "screenSize = ?, price = ?, guarantee = ?, stock = ? where mobiID = ?");
+            ps.setString(1, itemName);
+            ps.setInt(2, supplierName);
+            ps.setString(3, color);
+            ps.setString(4, screen);
+            ps.setString(5, price);
+            ps.setString(6, guarantee);
+            ps.setString(7, stock);
+            ps.setInt(8, id);
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Item updated successfully");
+            ItemDetail item = new ItemDetail();
+            item.setVisible(true);
+            this.dispose();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
     /**
@@ -244,6 +279,7 @@ public class EditItem extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCancel;
+    public static javax.swing.JComboBox<Object> cbSupllier;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -252,12 +288,11 @@ public class EditItem extends javax.swing.JFrame {
     private javax.swing.JLabel lbGuarantee;
     private javax.swing.JLabel lbLogin;
     private javax.swing.JLabel lbStock;
-    private javax.swing.JTextField txtColor;
-    private javax.swing.JTextField txtGuarantee;
-    private javax.swing.JTextField txtItemName;
-    private javax.swing.JTextField txtPrice;
-    private javax.swing.JTextField txtSSize;
-    private javax.swing.JTextField txtStock;
-    private javax.swing.JTextField txtSup;
+    protected javax.swing.JTextField txtColor;
+    protected javax.swing.JTextField txtGuarantee;
+    protected javax.swing.JTextField txtItemName;
+    protected javax.swing.JTextField txtPrice;
+    protected javax.swing.JTextField txtSSize;
+    protected javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
 }

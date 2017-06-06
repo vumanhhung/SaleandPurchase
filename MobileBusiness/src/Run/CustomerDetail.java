@@ -10,6 +10,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,8 +18,11 @@ import javax.swing.table.DefaultTableModel;
  * @author monki
  */
 public class CustomerDetail extends javax.swing.JFrame {
+
     static DefaultTableModel customerModel;
     public static Home home;
+    String customerID;
+
     /**
      * Creates new form CustomerDetail
      */
@@ -27,7 +31,7 @@ public class CustomerDetail extends javax.swing.JFrame {
         customerModel = (DefaultTableModel) tbCustomer.getModel();
         loadData();
     }
-    
+
     public static void loadData() {
         customerModel.setRowCount(0);
         try {
@@ -89,6 +93,11 @@ public class CustomerDetail extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tbCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbCustomerMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tbCustomer);
@@ -201,12 +210,12 @@ public class CustomerDetail extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void txtSearchCustomerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchCustomerKeyReleased
-          
+
     }//GEN-LAST:event_txtSearchCustomerKeyReleased
 
     private void btnSearchCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchCustomerActionPerformed
-         String searchText = txtSearchCustomer.getText();
-       customerModel.setRowCount(0);
+        String searchText = txtSearchCustomer.getText();
+        customerModel.setRowCount(0);
         try {
             Connection conn = MyConnect.getConnection();
             CallableStatement callSt = conn.prepareCall("{call searchCustomer(?)}");
@@ -236,13 +245,39 @@ public class CustomerDetail extends javax.swing.JFrame {
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         EditCustomer ec = new EditCustomer();
-        ec.setVisible(true);
-        this.dispose();
+        try {
+            if (customerID == null) {
+                JOptionPane.showMessageDialog(null, "You must select a customer to edit");
+            } else {
+                Connection conn = MyConnect.getConnection();
+                PreparedStatement ps = conn.prepareStatement("select * from Customer where CustomerID = ?");
+                ps.setString(1, customerID);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    ec.id = rs.getInt("CustomerID");
+                    ec.txtCusName.setText(rs.getString("CustomerName"));
+                    ec.txtPhone.setText(rs.getString("PhoneNumber"));
+                    ec.txtAddress.setText(rs.getString("CustomerAddress"));
+                    ec.txtCompanyAddress.setText(rs.getString("CustomerCompanyAddress"));
+                }
+                ec.setVisible(true);
+                this.dispose();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDelActionPerformed
+
+    private void tbCustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCustomerMouseClicked
+        int index = tbCustomer.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) tbCustomer.getModel();
+        customerID = model.getValueAt(index, 0).toString();
+    }//GEN-LAST:event_tbCustomerMouseClicked
 
     /**
      * @param args the command line arguments

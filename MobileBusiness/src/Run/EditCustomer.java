@@ -20,6 +20,7 @@ public class EditCustomer extends javax.swing.JFrame {
     String phone_valid = "0([0-9]{9,11})";
     Pattern p = Pattern.compile(phone_valid);
     Matcher m;
+    protected int id;
     /**
      * Creates new form EditCustomer
      */
@@ -171,12 +172,14 @@ public class EditCustomer extends javax.swing.JFrame {
                 txtPhone.setText("");
             } else {
                 Connection conn = MyConnect.getConnection();
-//                PreparedStatement ps = conn.prepareStatement("INSERT INTO Customer VALUES(?,?,?,?)");
-//                ps.setString(1, txtCustomerName);
-//                ps.setString(2, txtCusPhone);
-//                ps.setString(3, txtCusAddress);
-//                ps.setString(4, txtCompAddress);
-//                ps.executeUpdate();
+                PreparedStatement ps = conn.prepareStatement("update Customer set CustomerName = ?, PhoneNumber =  ?,"
+                        + "CustomerAddress = ?, CustomerCompanyAddress=? where CustomerID = ?");
+                ps.setString(1, txtCustomerName);
+                ps.setString(2, txtCusPhone);
+                ps.setString(3, txtCusAddress);
+                ps.setString(4, txtCompAddress);
+                ps.setInt(5, id);
+                ps.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Update customer successfully");
                 CustomerDetail cd = new CustomerDetail();
                 cd.setVisible(true);
@@ -237,9 +240,9 @@ public class EditCustomer extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lbLogin;
-    private javax.swing.JTextField txtAddress;
-    private javax.swing.JTextField txtCompanyAddress;
-    private javax.swing.JTextField txtCusName;
-    private javax.swing.JTextField txtPhone;
+    protected javax.swing.JTextField txtAddress;
+    protected javax.swing.JTextField txtCompanyAddress;
+    protected javax.swing.JTextField txtCusName;
+    protected javax.swing.JTextField txtPhone;
     // End of variables declaration//GEN-END:variables
 }

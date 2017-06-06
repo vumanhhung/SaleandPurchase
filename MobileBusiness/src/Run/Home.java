@@ -5,6 +5,12 @@
  */
 package Run;
 
+import GetConnect.MyConnect;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author VuManh
@@ -13,6 +19,7 @@ public class Home extends javax.swing.JFrame {
 
     public static String employeeCode;
     public static String employeeName;
+
     /**
      * Creates new form Home1
      */
