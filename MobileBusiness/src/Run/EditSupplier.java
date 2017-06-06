@@ -16,16 +16,14 @@ import javax.swing.JOptionPane;
  *
  * @author monki
  */
-public class AddCustomer extends javax.swing.JFrame {
-
+public class EditSupplier extends javax.swing.JFrame {
     String phone_valid = "0([0-9]{9,11})";
     Pattern p = Pattern.compile(phone_valid);
     Matcher m;
-
     /**
-     * Creates new form AddCustomer
+     * Creates new form EditSupplier
      */
-    public AddCustomer() {
+    public EditSupplier() {
         initComponents();
     }
 
@@ -40,43 +38,25 @@ public class AddCustomer extends javax.swing.JFrame {
 
         lbLogin = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtCompanyAddress = new javax.swing.JTextField();
+        btnAdd = new javax.swing.JButton();
+        txtAddress = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtPhone = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtAddress = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        txtCusName = new javax.swing.JTextField();
-        btnAdd = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
+        txtSupplierName = new javax.swing.JTextField();
+        cbTOP = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
 
         lbLogin.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         lbLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbLogin.setText("Add New Customer");
+        lbLogin.setText("Edit Supplier");
         lbLogin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Customer Name");
-
-        txtCompanyAddress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Company Address");
-
-        txtPhone.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Customer Address");
-
-        txtAddress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setText("Phone Number");
-
-        txtCusName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Supplier Name");
 
         btnAdd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnAdd.setText("Add New");
@@ -86,6 +66,19 @@ public class AddCustomer extends javax.swing.JFrame {
             }
         });
 
+        txtAddress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setText("Supplier Address");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setText("Type Of Phone");
+
+        txtPhone.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel9.setText("Phone Number");
+
         btnCancel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnCancel.setText("Cancel");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -94,17 +87,19 @@ public class AddCustomer extends javax.swing.JFrame {
             }
         });
 
+        txtSupplierName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        cbTOP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "IOS", "Android", "Windows" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(48, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(97, 97, 97)
+                        .addGap(8, 8, 8)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -114,20 +109,20 @@ public class AddCustomer extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(txtPhone)
-                                    .addComponent(txtCusName)
+                                    .addComponent(txtSupplierName)
                                     .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnAdd)
-                                    .addComponent(jLabel5))
+                                .addComponent(jLabel5)
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCompanyAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(btnCancel)
-                                        .addGap(76, 76, 76)))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(cbTOP, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(lbLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(102, 102, 102)
+                .addComponent(btnAdd)
+                .addGap(89, 89, 89)
+                .addComponent(btnCancel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +132,7 @@ public class AddCustomer extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtCusName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSupplierName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
@@ -149,41 +144,40 @@ public class AddCustomer extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtCompanyAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                    .addComponent(cbTOP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd)
                     .addComponent(btnCancel))
-                .addGap(29, 29, 29))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        String txtCustomerName = txtCusName.getText();
-        String txtCusPhone = txtPhone.getText();
-        String txtCusAddress = txtAddress.getText();
-        String txtCompAddress = txtCompanyAddress.getText();
-        m = p.matcher(txtCusPhone);
-        
+        String txtSupName = txtSupplierName.getText();
+        String txtPhoneNumber = txtPhone.getText();
+        String txtSupAddress = txtAddress.getText();
+        String type = cbTOP.getSelectedItem().toString();
+        m = p.matcher(txtPhoneNumber);
+
         try {
             if (!m.matches()) {
                 JOptionPane.showMessageDialog(null, "Invalid phone number!");
                 txtPhone.setText("");
             } else {
                 Connection conn = MyConnect.getConnection();
-                PreparedStatement ps = conn.prepareStatement("INSERT INTO Customer VALUES(?,?,?,?)");
-                ps.setString(1, txtCustomerName);
-                ps.setString(2, txtCusPhone);
-                ps.setString(3, txtCusAddress);
-                ps.setString(4, txtCompAddress);
-                ps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Customer added successfully");
-                CustomerDetail cd = new CustomerDetail();
-                cd.setVisible(true);
+//                PreparedStatement ps = conn.prepareStatement("Insert into Supplier values(?,?,?,?)");
+//                ps.setString(1, txtSupName);
+//                ps.setString(2, txtSupAddress);
+//                ps.setString(3, txtPhoneNumber);
+//                ps.setString(4, type);
+//                ps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Supplier added successfully");
+                SupplierDetail sd = new SupplierDetail();
+                sd.setVisible(true);
                 this.dispose();
             }
         } catch (Exception e) {
@@ -193,8 +187,8 @@ public class AddCustomer extends javax.swing.JFrame {
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
-        CustomerDetail cd = new CustomerDetail();
-        cd.setVisible(true);
+        SupplierDetail sd = new SupplierDetail();
+        sd.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
@@ -215,20 +209,20 @@ public class AddCustomer extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditSupplier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditSupplier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditSupplier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditSupplier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddCustomer().setVisible(true);
+                new EditSupplier().setVisible(true);
             }
         });
     }
@@ -236,14 +230,14 @@ public class AddCustomer extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCancel;
+    private javax.swing.JComboBox cbTOP;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lbLogin;
     private javax.swing.JTextField txtAddress;
-    private javax.swing.JTextField txtCompanyAddress;
-    private javax.swing.JTextField txtCusName;
     private javax.swing.JTextField txtPhone;
+    private javax.swing.JTextField txtSupplierName;
     // End of variables declaration//GEN-END:variables
 }

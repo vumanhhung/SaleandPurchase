@@ -234,7 +234,9 @@ public class SupplierDetail extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDelActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // TODO add your handling code here:
+        EditSupplier es = new EditSupplier();
+        es.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnEditActionPerformed
 
     /**

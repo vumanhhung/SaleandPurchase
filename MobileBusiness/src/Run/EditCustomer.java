@@ -16,16 +16,14 @@ import javax.swing.JOptionPane;
  *
  * @author monki
  */
-public class AddCustomer extends javax.swing.JFrame {
-
+public class EditCustomer extends javax.swing.JFrame {
     String phone_valid = "0([0-9]{9,11})";
     Pattern p = Pattern.compile(phone_valid);
     Matcher m;
-
     /**
-     * Creates new form AddCustomer
+     * Creates new form EditCustomer
      */
-    public AddCustomer() {
+    public EditCustomer() {
         initComponents();
     }
 
@@ -39,52 +37,35 @@ public class AddCustomer extends javax.swing.JFrame {
     private void initComponents() {
 
         lbLogin = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txtCompanyAddress = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         txtPhone = new javax.swing.JTextField();
+        btnEdit = new javax.swing.JButton();
+        txtCompanyAddress = new javax.swing.JTextField();
+        btnCancel = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtCusName = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtAddress = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        txtCusName = new javax.swing.JTextField();
-        btnAdd = new javax.swing.JButton();
-        btnCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
 
         lbLogin.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         lbLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbLogin.setText("Add New Customer");
+        lbLogin.setText("Edit Customer");
         lbLogin.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Customer Name");
-
-        txtCompanyAddress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Company Address");
 
         txtPhone.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Customer Address");
-
-        txtAddress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setText("Phone Number");
-
-        txtCusName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        btnAdd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnAdd.setText("Add New");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+        btnEdit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnEdit.setText("Update");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
+                btnEditActionPerformed(evt);
             }
         });
+
+        txtCompanyAddress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         btnCancel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnCancel.setText("Cancel");
@@ -93,6 +74,22 @@ public class AddCustomer extends javax.swing.JFrame {
                 btnCancelActionPerformed(evt);
             }
         });
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Customer Name");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setText("Company Address");
+
+        txtCusName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setText("Customer Address");
+
+        txtAddress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel9.setText("Phone Number");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,14 +115,14 @@ public class AddCustomer extends javax.swing.JFrame {
                                     .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnAdd)
+                                    .addComponent(btnEdit)
                                     .addComponent(jLabel5))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtCompanyAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(btnCancel)
-                                        .addGap(76, 76, 76)))))
+                                        .addGap(77, 77, 77)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -150,38 +147,37 @@ public class AddCustomer extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtCompanyAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd)
+                    .addComponent(btnEdit)
                     .addComponent(btnCancel))
-                .addGap(29, 29, 29))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
         String txtCustomerName = txtCusName.getText();
         String txtCusPhone = txtPhone.getText();
         String txtCusAddress = txtAddress.getText();
         String txtCompAddress = txtCompanyAddress.getText();
         m = p.matcher(txtCusPhone);
-        
+
         try {
             if (!m.matches()) {
                 JOptionPane.showMessageDialog(null, "Invalid phone number!");
                 txtPhone.setText("");
             } else {
                 Connection conn = MyConnect.getConnection();
-                PreparedStatement ps = conn.prepareStatement("INSERT INTO Customer VALUES(?,?,?,?)");
-                ps.setString(1, txtCustomerName);
-                ps.setString(2, txtCusPhone);
-                ps.setString(3, txtCusAddress);
-                ps.setString(4, txtCompAddress);
-                ps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Customer added successfully");
+//                PreparedStatement ps = conn.prepareStatement("INSERT INTO Customer VALUES(?,?,?,?)");
+//                ps.setString(1, txtCustomerName);
+//                ps.setString(2, txtCusPhone);
+//                ps.setString(3, txtCusAddress);
+//                ps.setString(4, txtCompAddress);
+//                ps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Update customer successfully");
                 CustomerDetail cd = new CustomerDetail();
                 cd.setVisible(true);
                 this.dispose();
@@ -189,7 +185,7 @@ public class AddCustomer extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_btnAddActionPerformed
+    }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
@@ -215,27 +211,27 @@ public class AddCustomer extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddCustomer().setVisible(true);
+                new EditCustomer().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnEdit;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

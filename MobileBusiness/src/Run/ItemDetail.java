@@ -81,7 +81,7 @@ public class ItemDetail extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Item Name", "Supplier Name", "Color", "Size", "Price", "Guarantee", "Stock"
+                "Item Name", "Supplier Name", "Color", "Screen Size ", "Price", "Guarantee", "Stock"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -177,12 +177,12 @@ public class ItemDetail extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnAdd)
                         .addComponent(btnEdit)
-                        .addComponent(btnDel)))
+                        .addComponent(btnDel))
+                    .addComponent(jButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -226,7 +226,9 @@ public class ItemDetail extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchItemActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
+        AddItem ai = new AddItem();
+        ai.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
@@ -234,7 +236,9 @@ public class ItemDetail extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
-        // TODO add your handling code here:
+        EditItem ei = new EditItem();
+        ei.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnDelActionPerformed
 
     /**

@@ -63,13 +63,13 @@
               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="275" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="btnAdd" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnEdit" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnDel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -99,7 +99,7 @@
                 <Column editable="false" title="Item Name" type="java.lang.Object"/>
                 <Column editable="false" title="Supplier Name" type="java.lang.Object"/>
                 <Column editable="false" title="Color" type="java.lang.Object"/>
-                <Column editable="false" title="Size" type="java.lang.Object"/>
+                <Column editable="false" title="Screen Size " type="java.lang.Object"/>
                 <Column editable="false" title="Price" type="java.lang.Object"/>
                 <Column editable="false" title="Guarantee" type="java.lang.Object"/>
                 <Column editable="false" title="Stock" type="java.lang.Object"/>
