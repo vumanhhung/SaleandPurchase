@@ -11,6 +11,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,34 +19,37 @@ import javax.swing.table.DefaultTableModel;
  * @author monki
  */
 public class ReportPurchase extends javax.swing.JFrame {
-static DefaultTableModel purchaseModel;
+
+    static DefaultTableModel purchaseModel;
+    private String purchaseID;
+    public static Home home;
+
     /**
      * Creates new form ReportPurchase
      */
     public ReportPurchase() {
         initComponents();
-        employeeModel = (DefaultTableModel) tblReport.getModel();
+        purchaseModel = (DefaultTableModel) tblReport.getModel();
         loadData();
     }
-    
+
     public static void loadData() {
-        employeeModel.setRowCount(0);
+        purchaseModel.setRowCount(0);
         try {
             Connection conn = MyConnect.getConnection();
-            //CallableStatement callSt = conn.prepareCall("{call getAllBook()}");
-            PreparedStatement ps = conn.prepareStatement("select * from Purchase");
-            ResultSet rs = ps.executeQuery();
+            CallableStatement callSt = conn.prepareCall("{call getPurchaseList()}");
+            //PreparedStatement ps = conn.prepareStatement("select * from Purchase"); 
+            ResultSet rs = callSt.executeQuery();
             while (rs.next()) {
-//                String id = rs.getString("purchaseID");
-//                String employeeName = rs.getString("customer");
-//                String phoneNumber = rs.getString("phoneNumber");
-//                String address = rs.getString("Address");
-//                String salary = rs.getString("salary");
-//                String dateOfJoin = rs.getString("dateOfJoin");
-//                Object[] row = {id, employeeName, phoneNumber, address, salary, dateOfJoin};
-//                employeeModel.addRow(row);
+                String id = rs.getString("purchaseID");
+                String customerName = rs.getString("CustomerName");
+                String employeeName = rs.getString("employeeName");
+                String buydate = rs.getString("buydate");
+                String totalPrice = rs.getString("totalPrice");
+                Object[] row = {id, customerName, employeeName, buydate, totalPrice};
+                purchaseModel.addRow(row);
             }
-            tblReport.setModel(employeeModel);
+            tblReport.setModel(purchaseModel);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -61,32 +65,38 @@ static DefaultTableModel purchaseModel;
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnHome = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
-        txtSearchEmployee = new javax.swing.JTextField();
+        txtSearchReport = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblReport = new javax.swing.JTable();
         btnView = new javax.swing.JButton();
         btnOrder = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setText("Purchase Report");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setText("Home");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnHome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnHome.setText("Home");
+        btnHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnHomeActionPerformed(evt);
             }
         });
 
         btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
-        txtSearchEmployee.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtSearchReport.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtSearchEmployeeKeyReleased(evt);
+                txtSearchReportKeyReleased(evt);
             }
         });
 
@@ -106,10 +116,20 @@ static DefaultTableModel purchaseModel;
                 return canEdit [columnIndex];
             }
         });
+        tblReport.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblReportMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblReport);
 
         btnView.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnView.setText("View Detail Order");
+        btnView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewActionPerformed(evt);
+            }
+        });
 
         btnOrder.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnOrder.setText("Create Order");
@@ -129,12 +149,12 @@ static DefaultTableModel purchaseModel;
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSearch)
                         .addGap(18, 18, 18)
-                        .addComponent(txtSearchEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtSearchReport, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(btnView)
                         .addGap(204, 204, 204)
-                        .addComponent(jButton1)
+                        .addComponent(btnHome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnOrder)))
                 .addGap(33, 33, 33))
@@ -146,52 +166,103 @@ static DefaultTableModel purchaseModel;
                 .addComponent(jLabel1)
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSearchEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSearchReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch))
                 .addGap(21, 21, 21)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnHome)
                     .addComponent(btnView)
                     .addComponent(btnOrder))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
         // TODO add your handling code here:
-        Home home = new Home();
         home.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnHomeActionPerformed
 
-    private void txtSearchEmployeeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchEmployeeKeyReleased
-        String searchText = txtSearchEmployee.getText();
-//        tblReport.setRowCount(0);
-        try {
-            Connection conn = MyConnect.getConnection();
-            CallableStatement callSt = conn.prepareCall("{call searchEmployee(?)}");
-            callSt.setString(1, searchText);
-            //PreparedStatement ps = conn.prepareStatement("select * from Employee");
-            ResultSet rs = callSt.executeQuery();
-            while (rs.next()) {
-                String id = rs.getString("employeeID");
-                String employeeName = rs.getString("employeeName");
-                String phoneNumber = rs.getString("phoneNumber");
-                String address = rs.getString("Address");
-                String salary = rs.getString("salary");
-                String dateOfJoin = rs.getString("dateOfJoin");
-                Object[] row = {id, employeeName, phoneNumber, address, salary, dateOfJoin};
-                employeeModel.addRow(row);
-            }
-            tblReport.setModel(employeeModel);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_txtSearchEmployeeKeyReleased
+    private void txtSearchReportKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchReportKeyReleased
+       
+    }//GEN-LAST:event_txtSearchReportKeyReleased
+
+    private void tblReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblReportMouseClicked
+        int index = tblReport.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) tblReport.getModel();
+        purchaseID = model.getValueAt(index, 0).toString();
+    }//GEN-LAST:event_tblReportMouseClicked
+
+    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
+        PurchaseDetail pd = new PurchaseDetail(); 
+        try { 
+            if (purchaseID == null) { 
+                JOptionPane.showMessageDialog(null, "You must select a purchase to view detail"); 
+            } else { 
+                Connection conn = MyConnect.getConnection(); 
+                CallableStatement callSt = conn.prepareCall("{call getPurchaseDetail(?)}"); 
+                callSt.setString(1, purchaseID); 
+                ResultSet rs = callSt.executeQuery(); 
+                if (rs.next()) { 
+                    pd.txtPurchaseID.setText(rs.getString("purchaseID")); 
+                    pd.txtCusName.setText(rs.getString("CustomerName")); 
+                    pd.txtEmpName.setText(rs.getString("employeeName")); 
+                    pd.txtBuyDate.setText(rs.getString("buydate")); 
+                    pd.txtTotalPrice.setText(rs.getString("totalPrice") + " $"); 
+                } 
+                try { 
+                    CallableStatement callSt1 = conn.prepareCall("{call getPurchaseDetailItemList(?)}"); 
+                    callSt1.setString(1, purchaseID); 
+                    ResultSet rs1 = callSt1.executeQuery(); 
+                    DefaultTableModel itemListModel = (DefaultTableModel) pd.tblPurchaseInfo.getModel(); 
+                    while (rs1.next()) { 
+                        String itemName = rs1.getString("mobiName"); 
+                        int quantity = rs1.getInt("quantity"); 
+                        int unitPrice = rs1.getInt("unitPrice");
+                        int totalunitPrice = quantity * unitPrice;
+                        Object[] row = {itemName, quantity, unitPrice + " $", totalunitPrice  + " $"}; 
+                        itemListModel.addRow(row); 
+                    } 
+                    pd.tblPurchaseInfo.setModel(itemListModel); 
+                } catch (Exception e) { 
+                    e.printStackTrace(); 
+                } 
+                pd.setVisible(true); 
+                this.dispose(); 
+            } 
+        } catch (Exception e) { 
+            e.printStackTrace(); 
+        } 
+    }//GEN-LAST:event_btnViewActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        String searchText = txtSearchReport.getText(); 
+        purchaseModel.setRowCount(0); 
+        try { 
+            Connection conn = MyConnect.getConnection(); 
+            CallableStatement callSt = conn.prepareCall("{call searchPurchaseList(?)}"); 
+            callSt.setString(1, searchText); 
+            //PreparedStatement ps = conn.prepareStatement("select * from Employee"); 
+            ResultSet rs = callSt.executeQuery(); 
+            while (rs.next()) { 
+                String id = rs.getString("purchaseID"); 
+                String customerName = rs.getString("CustomerName"); 
+                String employeeName = rs.getString("employeeName"); 
+                String buydate = rs.getString("buydate"); 
+                String totalPrice = rs.getString("totalPrice"); 
+                Object[] row = {id, customerName, employeeName, buydate, totalPrice}; 
+                purchaseModel.addRow(row); 
+            } 
+            tblReport.setModel(purchaseModel); 
+        } catch (Exception e) { 
+            e.printStackTrace(); 
+        } 
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,13 +300,13 @@ static DefaultTableModel purchaseModel;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnHome;
     private javax.swing.JButton btnOrder;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnView;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private static javax.swing.JTable tblReport;
-    private javax.swing.JTextField txtSearchEmployee;
+    private javax.swing.JTextField txtSearchReport;
     // End of variables declaration//GEN-END:variables
 }

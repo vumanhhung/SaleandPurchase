@@ -49,6 +49,7 @@ public class EditSupplier extends javax.swing.JFrame {
         cbTOP = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         lbLogin.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         lbLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -59,7 +60,7 @@ public class EditSupplier extends javax.swing.JFrame {
         jLabel2.setText("Supplier Name");
 
         btnAdd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnAdd.setText("Add New");
+        btnAdd.setText("Update");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
@@ -153,6 +154,7 @@ public class EditSupplier extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed

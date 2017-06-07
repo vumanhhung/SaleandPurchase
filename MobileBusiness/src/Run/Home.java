@@ -240,10 +240,10 @@ public class Home extends javax.swing.JFrame {
 
     private void btnReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportActionPerformed
         // TODO add your handling code here:
-//        ReportPurchase rp = new ReportPurchase();
-//        rp.setVisible(true);
-//        rp.home = this;
-//        this.dispose();
+        ReportPurchase rp = new ReportPurchase();
+        rp.setVisible(true);
+        rp.home = this;
+        this.dispose();
     }//GEN-LAST:event_btnReportActionPerformed
 
     private void btnSuppllierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuppllierActionPerformed

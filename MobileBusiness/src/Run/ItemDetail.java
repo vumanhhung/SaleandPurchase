@@ -75,7 +75,6 @@ public class ItemDetail extends javax.swing.JFrame {
         btnSearchItem = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
-        btnDel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -128,7 +127,7 @@ public class ItemDetail extends javax.swing.JFrame {
         });
 
         btnAdd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnAdd.setText("Add");
+        btnAdd.setText("Add New Item");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
@@ -140,14 +139,6 @@ public class ItemDetail extends javax.swing.JFrame {
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditActionPerformed(evt);
-            }
-        });
-
-        btnDel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnDel.setText("Delete");
-        btnDel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDelActionPerformed(evt);
             }
         });
 
@@ -171,11 +162,9 @@ public class ItemDetail extends javax.swing.JFrame {
                 .addComponent(btnAdd)
                 .addGap(18, 18, 18)
                 .addComponent(btnEdit)
-                .addGap(161, 161, 161)
+                .addGap(107, 107, 107)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnDel)
-                .addGap(56, 56, 56))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,13 +178,11 @@ public class ItemDetail extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnAdd)
-                        .addComponent(btnEdit)
-                        .addComponent(btnDel))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdd)
+                    .addComponent(btnEdit)
                     .addComponent(jButton1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -285,12 +272,6 @@ public class ItemDetail extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEditActionPerformed
 
-    private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
-        EditItem ei = new EditItem();
-        ei.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnDelActionPerformed
-
     private void tbItemsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbItemsMouseClicked
         int index = tbItems.getSelectedRow();
         DefaultTableModel model = (DefaultTableModel) tbItems.getModel();
@@ -335,7 +316,6 @@ public class ItemDetail extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnDel;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnSearchItem;
     private javax.swing.JButton jButton1;

@@ -39,8 +39,6 @@ public class PurchaseDetail extends javax.swing.JFrame {
         txtCusName = new javax.swing.JTextField();
         txtEmpName = new javax.swing.JTextField();
         txtBuyDate = new javax.swing.JTextField();
-        lbBuyDate1 = new javax.swing.JLabel();
-        txtGuarantee = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         lbQuantity3 = new javax.swing.JLabel();
         txtTotalPrice = new javax.swing.JTextField();
@@ -62,6 +60,7 @@ public class PurchaseDetail extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setText("Purchase Detail");
@@ -86,19 +85,21 @@ public class PurchaseDetail extends javax.swing.JFrame {
         lbBuyDate.setText("Buy Date");
         lbBuyDate.setToolTipText("");
 
+        txtPurchaseID.setEditable(false);
+        txtPurchaseID.setBackground(new java.awt.Color(255, 255, 255));
         txtPurchaseID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
+        txtCusName.setEditable(false);
+        txtCusName.setBackground(new java.awt.Color(255, 255, 255));
         txtCusName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
+        txtEmpName.setEditable(false);
+        txtEmpName.setBackground(new java.awt.Color(255, 255, 255));
         txtEmpName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
+        txtBuyDate.setEditable(false);
+        txtBuyDate.setBackground(new java.awt.Color(255, 255, 255));
         txtBuyDate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        lbBuyDate1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbBuyDate1.setText("Guarantee");
-        lbBuyDate1.setToolTipText("");
-
-        txtGuarantee.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -107,22 +108,16 @@ public class PurchaseDetail extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbCusName)
-                            .addComponent(lbBuyDate)
-                            .addComponent(lbEmpName)
-                            .addComponent(lbPurchaseID))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtBuyDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCusName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEmpName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPurchaseID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(lbBuyDate1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtGuarantee, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lbCusName)
+                    .addComponent(lbBuyDate)
+                    .addComponent(lbEmpName)
+                    .addComponent(lbPurchaseID))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtBuyDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCusName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEmpName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPurchaseID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -144,11 +139,7 @@ public class PurchaseDetail extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbBuyDate)
                     .addComponent(txtBuyDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtGuarantee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbBuyDate1))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Purchase Information"), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
@@ -158,6 +149,8 @@ public class PurchaseDetail extends javax.swing.JFrame {
         lbQuantity3.setText("Total Price");
         lbQuantity3.setToolTipText("");
 
+        txtTotalPrice.setEditable(false);
+        txtTotalPrice.setBackground(new java.awt.Color(255, 255, 255));
         txtTotalPrice.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         tblPurchaseInfo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -166,22 +159,24 @@ public class PurchaseDetail extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mobile Name ", "Quantity", "Unit Price"
+                "Mobile Name ", "Quantity", "Unit Price", "Total Unit Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        tblPurchaseInfo.setEnabled(false);
         jScrollPane2.setViewportView(tblPurchaseInfo);
         if (tblPurchaseInfo.getColumnModel().getColumnCount() > 0) {
             tblPurchaseInfo.getColumnModel().getColumn(0).setResizable(false);
             tblPurchaseInfo.getColumnModel().getColumn(1).setResizable(false);
             tblPurchaseInfo.getColumnModel().getColumn(2).setResizable(false);
+            tblPurchaseInfo.getColumnModel().getColumn(3).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -209,6 +204,11 @@ public class PurchaseDetail extends javax.swing.JFrame {
 
         btnReturn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnReturn.setText("Return");
+        btnReturn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReturnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -241,13 +241,20 @@ public class PurchaseDetail extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(59, 59, 59)
                 .addComponent(btnReturn)
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
+        ReportPurchase rp = new ReportPurchase();
+        rp.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnReturnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -293,17 +300,15 @@ public class PurchaseDetail extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbBuyDate;
-    private javax.swing.JLabel lbBuyDate1;
     private javax.swing.JLabel lbCusName;
     private javax.swing.JLabel lbEmpName;
     private javax.swing.JLabel lbPurchaseID;
     private javax.swing.JLabel lbQuantity3;
-    private javax.swing.JTable tblPurchaseInfo;
-    private javax.swing.JTextField txtBuyDate;
-    private javax.swing.JTextField txtCusName;
-    private javax.swing.JTextField txtEmpName;
-    private javax.swing.JTextField txtGuarantee;
-    private javax.swing.JTextField txtPurchaseID;
-    private javax.swing.JTextField txtTotalPrice;
+    public static javax.swing.JTable tblPurchaseInfo;
+    public static javax.swing.JTextField txtBuyDate;
+    public static javax.swing.JTextField txtCusName;
+    public static javax.swing.JTextField txtEmpName;
+    public static javax.swing.JTextField txtPurchaseID;
+    public static javax.swing.JTextField txtTotalPrice;
     // End of variables declaration//GEN-END:variables
 }

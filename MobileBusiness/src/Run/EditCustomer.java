@@ -50,6 +50,7 @@ public class EditCustomer extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         lbLogin.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         lbLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -156,6 +157,7 @@ public class EditCustomer extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed

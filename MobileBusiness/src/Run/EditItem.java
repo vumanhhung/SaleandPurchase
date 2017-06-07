@@ -17,7 +17,6 @@ import javax.swing.JOptionPane;
  * @author monki
  */
 public class EditItem extends javax.swing.JFrame {
-
     protected int id;
 
     /**
@@ -46,15 +45,16 @@ public class EditItem extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtSSize = new javax.swing.JTextField();
-        btnAdd = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtPrice = new javax.swing.JTextField();
         lbGuarantee = new javax.swing.JLabel();
         txtColor = new javax.swing.JTextField();
-        cbSupllier = new javax.swing.JComboBox<>();
+        cbSupllier = new javax.swing.JComboBox<Object>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         lbLogin.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         lbLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -89,11 +89,11 @@ public class EditItem extends javax.swing.JFrame {
 
         txtSSize.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        btnAdd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnAdd.setText("Add New");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+        btnEdit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnEdit.setText("Update");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
+                btnEditActionPerformed(evt);
             }
         });
 
@@ -148,7 +148,7 @@ public class EditItem extends javax.swing.JFrame {
                                         .addComponent(txtGuarantee, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
-                                            .addComponent(btnAdd)
+                                            .addComponent(btnEdit)
                                             .addGap(68, 68, 68)
                                             .addComponent(btnCancel))
                                         .addGroup(layout.createSequentialGroup()
@@ -193,12 +193,13 @@ public class EditItem extends javax.swing.JFrame {
                     .addComponent(lbStock))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd)
+                    .addComponent(btnEdit)
                     .addComponent(btnCancel))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -208,7 +209,7 @@ public class EditItem extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
         String itemName = txtItemName.getText();
         Object itemSupplier = cbSupllier.getSelectedItem();
@@ -239,7 +240,7 @@ public class EditItem extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_btnAddActionPerformed
+    }//GEN-LAST:event_btnEditActionPerformed
 
     /**
      * @param args the command line arguments
@@ -277,8 +278,8 @@ public class EditItem extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnEdit;
     public static javax.swing.JComboBox<Object> cbSupllier;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
