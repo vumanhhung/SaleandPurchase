@@ -74,6 +74,7 @@ public class AddMobileToOrder extends javax.swing.JFrame {
         }
 
         btnAddToOrder.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnAddToOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/done.png"))); // NOI18N
         btnAddToOrder.setText("Add to Order");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -111,7 +112,7 @@ public class AddMobileToOrder extends javax.swing.JFrame {
                 .addComponent(tblMobi, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnAddToOrder)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();

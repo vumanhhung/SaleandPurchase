@@ -80,6 +80,7 @@ public class ReportPurchase extends javax.swing.JFrame {
         jLabel1.setText("Purchase Report");
 
         btnHome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/home.png"))); // NOI18N
         btnHome.setText("Home");
         btnHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,6 +88,7 @@ public class ReportPurchase extends javax.swing.JFrame {
             }
         });
 
+        btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/search.png"))); // NOI18N
         btnSearch.setText("Search");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,6 +126,7 @@ public class ReportPurchase extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblReport);
 
         btnView.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/show.png"))); // NOI18N
         btnView.setText("View Detail Order");
         btnView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,6 +135,7 @@ public class ReportPurchase extends javax.swing.JFrame {
         });
 
         btnOrder.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/create.png"))); // NOI18N
         btnOrder.setText("Create Order");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -153,7 +157,7 @@ public class ReportPurchase extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(btnView)
-                        .addGap(204, 204, 204)
+                        .addGap(162, 162, 162)
                         .addComponent(btnHome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnOrder)))
@@ -175,7 +179,7 @@ public class ReportPurchase extends javax.swing.JFrame {
                     .addComponent(btnHome)
                     .addComponent(btnView)
                     .addComponent(btnOrder))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();

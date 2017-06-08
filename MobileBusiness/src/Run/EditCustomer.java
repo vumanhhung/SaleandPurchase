@@ -60,6 +60,7 @@ public class EditCustomer extends javax.swing.JFrame {
         txtPhone.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         btnEdit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/save.png"))); // NOI18N
         btnEdit.setText("Update");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,6 +71,7 @@ public class EditCustomer extends javax.swing.JFrame {
         txtCompanyAddress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         btnCancel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/cancel.png"))); // NOI18N
         btnCancel.setText("Cancel");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,15 +118,14 @@ public class EditCustomer extends javax.swing.JFrame {
                                     .addComponent(txtCusName)
                                     .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnEdit)
-                                    .addComponent(jLabel5))
+                                .addComponent(jLabel5)
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCompanyAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(btnCancel)
-                                        .addGap(77, 77, 77)))))
+                                .addComponent(txtCompanyAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnEdit)
+                                .addGap(67, 67, 67)
+                                .addComponent(btnCancel)
+                                .addGap(66, 66, 66)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );

@@ -151,6 +151,7 @@ public class Register extends javax.swing.JFrame {
         jLabel5.setText("Salary");
 
         txtEmpCode.setEditable(false);
+        txtEmpCode.setBackground(new java.awt.Color(255, 255, 255));
         txtEmpCode.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         txtEmpName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -160,6 +161,7 @@ public class Register extends javax.swing.JFrame {
         txtSalary.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         txtDOJ.setEditable(false);
+        txtDOJ.setBackground(new java.awt.Color(255, 255, 255));
         txtDOJ.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         txtPhone.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -221,6 +223,7 @@ public class Register extends javax.swing.JFrame {
         );
 
         btnRegister.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnRegister.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/done.png"))); // NOI18N
         btnRegister.setText("Register");
         btnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -229,6 +232,7 @@ public class Register extends javax.swing.JFrame {
         });
 
         btnCancel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/cancel.png"))); // NOI18N
         btnCancel.setText("Cancel");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -245,9 +249,9 @@ public class Register extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(120, 120, 120)
+                                .addGap(117, 117, 117)
                                 .addComponent(btnRegister)
-                                .addGap(137, 137, 137)
+                                .addGap(140, 140, 140)
                                 .addComponent(btnCancel))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
@@ -265,11 +269,15 @@ public class Register extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegister)
-                    .addComponent(btnCancel))
-                .addGap(20, 20, 20))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCancel)
+                        .addGap(20, 20, 20))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRegister)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
