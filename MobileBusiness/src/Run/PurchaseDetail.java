@@ -66,7 +66,7 @@ public class PurchaseDetail extends javax.swing.JFrame {
         jLabel1.setText("Purchase Detail");
         jLabel1.setToolTipText("");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Personal Information")));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("General Information")));
         jPanel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         lbPurchaseID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N

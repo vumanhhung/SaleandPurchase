@@ -49,7 +49,7 @@ public class ItemDetail extends javax.swing.JFrame {
                 String price = rs.getString("price");
                 String guarantee = rs.getString("guarantee");
                 int stock = rs.getInt("stock");
-                Object[] row = {itemID, mobiName, supName, color, size, price, guarantee + " year", stock};
+                Object[] row = {itemID, mobiName, supName, color, size, price + " $", guarantee + " year", stock};
                 itemModel.addRow(row);
             }
             tbItems.setModel(itemModel);
@@ -146,7 +146,7 @@ public class ItemDetail extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 862, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSearchItem)
@@ -154,17 +154,18 @@ public class ItemDetail extends javax.swing.JFrame {
                 .addComponent(txtSearchItem, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel1)
-                .addContainerGap(432, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(btnAdd)
-                .addGap(18, 18, 18)
-                .addComponent(btnEdit)
-                .addGap(107, 107, 107)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(btnAdd)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEdit)
+                        .addGap(209, 209, 209)
+                        .addComponent(jButton1)))
+                .addContainerGap(347, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

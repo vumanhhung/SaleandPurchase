@@ -20,6 +20,7 @@ public class EditSupplier extends javax.swing.JFrame {
     String phone_valid = "0([0-9]{9,11})";
     Pattern p = Pattern.compile(phone_valid);
     Matcher m;
+    protected int id;
     /**
      * Creates new form EditSupplier
      */
@@ -38,7 +39,7 @@ public class EditSupplier extends javax.swing.JFrame {
 
         lbLogin = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        btnAdd = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
         txtAddress = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -59,11 +60,11 @@ public class EditSupplier extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Supplier Name");
 
-        btnAdd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnAdd.setText("Update");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+        btnEdit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnEdit.setText("Update");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
+                btnEditActionPerformed(evt);
             }
         });
 
@@ -120,7 +121,7 @@ public class EditSupplier extends javax.swing.JFrame {
                 .addGap(42, 42, 42))
             .addGroup(layout.createSequentialGroup()
                 .addGap(102, 102, 102)
-                .addComponent(btnAdd)
+                .addComponent(btnEdit)
                 .addGap(89, 89, 89)
                 .addComponent(btnCancel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -148,7 +149,7 @@ public class EditSupplier extends javax.swing.JFrame {
                     .addComponent(cbTOP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd)
+                    .addComponent(btnEdit)
                     .addComponent(btnCancel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -157,7 +158,7 @@ public class EditSupplier extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
         String txtSupName = txtSupplierName.getText();
         String txtPhoneNumber = txtPhone.getText();
@@ -171,13 +172,15 @@ public class EditSupplier extends javax.swing.JFrame {
                 txtPhone.setText("");
             } else {
                 Connection conn = MyConnect.getConnection();
-//                PreparedStatement ps = conn.prepareStatement("Insert into Supplier values(?,?,?,?)");
-//                ps.setString(1, txtSupName);
-//                ps.setString(2, txtSupAddress);
-//                ps.setString(3, txtPhoneNumber);
-//                ps.setString(4, type);
-//                ps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Supplier added successfully");
+                PreparedStatement ps = conn.prepareStatement("update Supplier set supName = ?, Address  =  ?,"
+                        + "phoneNumber = ?, typeOfMobile = ? where supID = ?");
+                ps.setString(1, txtSupName);
+                ps.setString(2, txtSupAddress);
+                ps.setString(3, txtPhoneNumber);
+                ps.setString(4, type);
+                ps.setInt(5, id);
+                ps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Edit Supplier successfully");
                 SupplierDetail sd = new SupplierDetail();
                 sd.setVisible(true);
                 this.dispose();
@@ -185,7 +188,7 @@ public class EditSupplier extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_btnAddActionPerformed
+    }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
@@ -230,16 +233,16 @@ public class EditSupplier extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCancel;
-    private javax.swing.JComboBox cbTOP;
+    private javax.swing.JButton btnEdit;
+    protected javax.swing.JComboBox cbTOP;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lbLogin;
-    private javax.swing.JTextField txtAddress;
-    private javax.swing.JTextField txtPhone;
-    private javax.swing.JTextField txtSupplierName;
+    protected javax.swing.JTextField txtAddress;
+    protected javax.swing.JTextField txtPhone;
+    protected javax.swing.JTextField txtSupplierName;
     // End of variables declaration//GEN-END:variables
 }

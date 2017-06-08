@@ -105,7 +105,7 @@
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder>
               <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Personal Information"/>
+                <TitledBorder title="General Information"/>
               </Border>
             </TitledBorder>
           </Border>

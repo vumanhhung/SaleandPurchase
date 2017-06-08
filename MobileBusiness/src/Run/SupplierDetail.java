@@ -6,10 +6,12 @@
 package Run;
 
 import GetConnect.MyConnect;
+import static Run.EmployeeDetail.tbEmployee;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 public class SupplierDetail extends javax.swing.JFrame {
     static DefaultTableModel supplierModel;
     public static Home home;
+    String supplierID;
     /**
      * Creates new form CustomerDetail
      */
@@ -66,7 +69,6 @@ public class SupplierDetail extends javax.swing.JFrame {
         btnHome = new javax.swing.JButton();
         btnSearchSupplier = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
-        btnDel = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -89,6 +91,11 @@ public class SupplierDetail extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tbSupplier.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbSupplierMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tbSupplier);
@@ -122,14 +129,6 @@ public class SupplierDetail extends javax.swing.JFrame {
             }
         });
 
-        btnDel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnDel.setText("Delete");
-        btnDel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDelActionPerformed(evt);
-            }
-        });
-
         btnEdit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnEdit.setText("Edit");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -160,9 +159,7 @@ public class SupplierDetail extends javax.swing.JFrame {
                 .addComponent(btnEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnHome)
-                .addGap(294, 294, 294)
-                .addComponent(btnDel)
-                .addContainerGap())
+                .addGap(375, 375, 375))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,7 +176,6 @@ public class SupplierDetail extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnHome)
                     .addComponent(btnAdd)
-                    .addComponent(btnDel)
                     .addComponent(btnEdit))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -229,15 +225,36 @@ public class SupplierDetail extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnAddActionPerformed
 
-    private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDelActionPerformed
-
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         EditSupplier es = new EditSupplier();
-        es.setVisible(true);
-        this.dispose();
+        try {
+            if (supplierID == null) {
+                JOptionPane.showMessageDialog(null, "You must select a supplier to edit");
+            } else {
+                Connection conn = MyConnect.getConnection();
+                PreparedStatement ps = conn.prepareStatement("select * from Supplier where supID = ?");
+                ps.setString(1, supplierID);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    es.id = rs.getInt("supID");
+                    es.txtSupplierName.setText(rs.getString("supName"));
+                    es.txtAddress.setText(rs.getString("Address"));
+                    es.txtPhone.setText(rs.getString("phoneNumber"));
+                    es.cbTOP.setSelectedItem(rs.getString("typeOfMobile"));
+                }
+                es.setVisible(true);
+                this.dispose();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnEditActionPerformed
+
+    private void tbSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSupplierMouseClicked
+        int index = tbSupplier.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) tbSupplier.getModel();
+        supplierID = model.getValueAt(index, 0).toString();
+    }//GEN-LAST:event_tbSupplierMouseClicked
 
     /**
      * @param args the command line arguments
@@ -279,7 +296,6 @@ public class SupplierDetail extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnDel;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnSearchSupplier;

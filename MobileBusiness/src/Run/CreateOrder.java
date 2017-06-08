@@ -32,20 +32,20 @@ public class CreateOrder extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         lbQuantity3 = new javax.swing.JLabel();
         txtTotalPrice = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        tblOrderMobi = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnAddMobi = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         btnCheckCus = new javax.swing.JButton();
-        txtPurchaseID1 = new javax.swing.JTextField();
+        txtCheckCus = new javax.swing.JTextField();
         lbCusName = new javax.swing.JLabel();
         txtCusName = new javax.swing.JTextField();
         lbCusName1 = new javax.swing.JLabel();
-        txtCusName1 = new javax.swing.JTextField();
+        txtPhone = new javax.swing.JTextField();
         lbCusName2 = new javax.swing.JLabel();
-        txtCusName2 = new javax.swing.JTextField();
+        txtAddress = new javax.swing.JTextField();
         lbCusName3 = new javax.swing.JLabel();
-        txtCusName3 = new javax.swing.JTextField();
+        txtComAddress = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -83,7 +83,7 @@ public class CreateOrder extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        tblOrderMobi.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
             jTable1.getColumnModel().getColumn(1).setResizable(false);
@@ -91,11 +91,11 @@ public class CreateOrder extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setText("Add Mobile");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAddMobi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnAddMobi.setText("Add Mobile");
+        btnAddMobi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAddMobiActionPerformed(evt);
             }
         });
 
@@ -109,19 +109,19 @@ public class CreateOrder extends javax.swing.JFrame {
                 .addGap(102, 102, 102)
                 .addComponent(txtTotalPrice)
                 .addContainerGap())
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+            .addComponent(tblOrderMobi, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(86, 86, 86)
-                .addComponent(jButton1)
+                .addComponent(btnAddMobi)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnAddMobi)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tblOrderMobi, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -133,7 +133,7 @@ public class CreateOrder extends javax.swing.JFrame {
         btnCheckCus.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnCheckCus.setText("Check Customer");
 
-        txtPurchaseID1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtCheckCus.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         lbCusName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbCusName.setText("Customer Name");
@@ -145,19 +145,19 @@ public class CreateOrder extends javax.swing.JFrame {
         lbCusName1.setText("Phone Number");
         lbCusName1.setToolTipText("");
 
-        txtCusName1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtPhone.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         lbCusName2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbCusName2.setText("Address");
         lbCusName2.setToolTipText("");
 
-        txtCusName2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtAddress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         lbCusName3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbCusName3.setText("Company Address");
         lbCusName3.setToolTipText("");
 
-        txtCusName3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtComAddress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -169,7 +169,7 @@ public class CreateOrder extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(btnCheckCus)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtPurchaseID1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtCheckCus, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(lbCusName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -177,15 +177,15 @@ public class CreateOrder extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(lbCusName1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtCusName1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(lbCusName2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtCusName2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(lbCusName3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtCusName3, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtComAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -194,7 +194,7 @@ public class CreateOrder extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCheckCus)
-                    .addComponent(txtPurchaseID1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCheckCus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbCusName)
@@ -202,15 +202,15 @@ public class CreateOrder extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbCusName1)
-                    .addComponent(txtCusName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbCusName2)
-                    .addComponent(txtCusName2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbCusName3)
-                    .addComponent(txtCusName3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtComAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -250,11 +250,11 @@ public class CreateOrder extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAddMobiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMobiActionPerformed
         AddMobileToOrder amto = new AddMobileToOrder();
         amto.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAddMobiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -292,24 +292,24 @@ public class CreateOrder extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddMobi;
     private javax.swing.JButton btnCheckCus;
     private javax.swing.JButton btnReturn;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbCusName;
     private javax.swing.JLabel lbCusName1;
     private javax.swing.JLabel lbCusName2;
     private javax.swing.JLabel lbCusName3;
     private javax.swing.JLabel lbQuantity3;
+    private javax.swing.JScrollPane tblOrderMobi;
+    private javax.swing.JTextField txtAddress;
+    private javax.swing.JTextField txtCheckCus;
+    private javax.swing.JTextField txtComAddress;
     private javax.swing.JTextField txtCusName;
-    private javax.swing.JTextField txtCusName1;
-    private javax.swing.JTextField txtCusName2;
-    private javax.swing.JTextField txtCusName3;
-    private javax.swing.JTextField txtPurchaseID1;
+    private javax.swing.JTextField txtPhone;
     private javax.swing.JTextField txtTotalPrice;
     // End of variables declaration//GEN-END:variables
 }

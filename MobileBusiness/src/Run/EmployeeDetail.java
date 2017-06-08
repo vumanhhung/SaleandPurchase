@@ -10,6 +10,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,8 +18,11 @@ import javax.swing.table.DefaultTableModel;
  * @author monki
  */
 public class EmployeeDetail extends javax.swing.JFrame {
+
     static DefaultTableModel employeeModel;
     public static Home home;
+    String employeeCode;
+
     /**
      * Creates new form CustomerDetail
      */
@@ -27,8 +31,8 @@ public class EmployeeDetail extends javax.swing.JFrame {
         employeeModel = (DefaultTableModel) tbEmployee.getModel();
         loadData();
     }
-    
-     public static void loadData() {
+
+    public static void loadData() {
         employeeModel.setRowCount(0);
         try {
             Connection conn = MyConnect.getConnection();
@@ -64,11 +68,10 @@ public class EmployeeDetail extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbEmployee = new javax.swing.JTable();
         txtSearchEmployee = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnHome = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
-        btnDel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -81,7 +84,7 @@ public class EmployeeDetail extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Name", "Phone Number", "Address", "Date of joining", "Salary", "Salary Infor"
+                "Code", "Name", "Phone Number", "Address", "Date of joining", "Salary", "Salary Infor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -92,6 +95,11 @@ public class EmployeeDetail extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbEmployeeMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbEmployee);
 
         txtSearchEmployee.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -100,11 +108,11 @@ public class EmployeeDetail extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setText("Home");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnHome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnHome.setText("Home");
+        btnHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnHomeActionPerformed(evt);
             }
         });
 
@@ -131,14 +139,6 @@ public class EmployeeDetail extends javax.swing.JFrame {
             }
         });
 
-        btnDel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnDel.setText("Delete");
-        btnDel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDelActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -151,19 +151,18 @@ public class EmployeeDetail extends javax.swing.JFrame {
                 .addComponent(txtSearchEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel1)
-                .addContainerGap(490, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(btnAdd)
-                .addGap(18, 18, 18)
-                .addComponent(btnEdit)
-                .addGap(200, 200, 200)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnDel)
-                .addGap(22, 22, 22))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addComponent(btnAdd)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEdit)
+                        .addGap(172, 172, 172)
+                        .addComponent(btnHome)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,10 +177,9 @@ public class EmployeeDetail extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnHome)
                     .addComponent(btnAdd)
-                    .addComponent(btnEdit)
-                    .addComponent(btnDel))
+                    .addComponent(btnEdit))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -189,21 +187,21 @@ public class EmployeeDetail extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
         home.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnHomeActionPerformed
 
     private void txtSearchEmployeeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchEmployeeKeyReleased
-       
+
     }//GEN-LAST:event_txtSearchEmployeeKeyReleased
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-         String searchText = txtSearchEmployee.getText();
-       employeeModel.setRowCount(0);
+        String searchText = txtSearchEmployee.getText();
+        employeeModel.setRowCount(0);
         try {
             Connection conn = MyConnect.getConnection();
-            CallableStatement callSt = conn.prepareCall("{call searchEmployee(?)}"); 
+            CallableStatement callSt = conn.prepareCall("{call searchEmployee(?)}");
             callSt.setString(1, searchText);
             //PreparedStatement ps = conn.prepareStatement("select * from Employee");
             ResultSet rs = callSt.executeQuery();
@@ -223,17 +221,43 @@ public class EmployeeDetail extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddActionPerformed
-
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // TODO add your handling code here:
+        EditEmployee ee = new EditEmployee();
+        try {
+            if (employeeCode == null) {
+                JOptionPane.showMessageDialog(null, "You must select a employee to edit");
+            } else {
+                Connection conn = MyConnect.getConnection();
+                PreparedStatement ps = conn.prepareStatement("select * from Employee where employeeCode = ?");
+                ps.setString(1, employeeCode);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    ee.code = rs.getInt("employeeCode");
+                    ee.txtUserName.setText(rs.getString("userName"));
+                    ee.txtEmpName.setText(rs.getString("employeeName"));
+                    ee.txtPhone.setText(rs.getString("phoneNumber"));
+                    ee.txtAddress.setText(rs.getString("Address"));
+                    ee.txtSalary.setText(rs.getString("salary") + "$");
+                }
+                ee.setVisible(true);
+                this.dispose();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnEditActionPerformed
 
-    private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDelActionPerformed
+    private void tbEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbEmployeeMouseClicked
+        int index = tbEmployee.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) tbEmployee.getModel();
+        employeeCode = model.getValueAt(index, 0).toString();
+    }//GEN-LAST:event_tbEmployeeMouseClicked
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        Register regist = new Register();
+        regist.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnAddActionPerformed
 
     /**
      * @param args the command line arguments
@@ -273,13 +297,12 @@ public class EmployeeDetail extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnDel;
     private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnHome;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private static javax.swing.JTable tbEmployee;
+    public static javax.swing.JTable tbEmployee;
     private javax.swing.JTextField txtSearchEmployee;
     // End of variables declaration//GEN-END:variables
 }

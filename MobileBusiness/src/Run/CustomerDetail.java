@@ -71,7 +71,6 @@ public class CustomerDetail extends javax.swing.JFrame {
         btnSearchCustomer = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
-        btnDel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -145,14 +144,6 @@ public class CustomerDetail extends javax.swing.JFrame {
             }
         });
 
-        btnDel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnDel.setText("Delete");
-        btnDel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDelActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -176,9 +167,7 @@ public class CustomerDetail extends javax.swing.JFrame {
                         .addComponent(btnEdit)
                         .addGap(205, 205, 205)
                         .addComponent(btnHome)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnDel)
-                        .addGap(38, 38, 38))))
+                        .addGap(38, 341, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,8 +184,7 @@ public class CustomerDetail extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnHome)
                     .addComponent(btnAdd)
-                    .addComponent(btnEdit)
-                    .addComponent(btnDel))
+                    .addComponent(btnEdit))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -269,10 +257,6 @@ public class CustomerDetail extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnEditActionPerformed
 
-    private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDelActionPerformed
-
     private void tbCustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCustomerMouseClicked
         int index = tbCustomer.getSelectedRow();
         DefaultTableModel model = (DefaultTableModel) tbCustomer.getModel();
@@ -323,7 +307,6 @@ public class CustomerDetail extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnDel;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnSearchCustomer;
