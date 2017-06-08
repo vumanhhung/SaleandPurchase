@@ -66,7 +66,6 @@ create table PurchaseDetail(
 	purchaseID int foreign key references Purchase(purchaseID),
 	mobiID int foreign key references Items(mobiID),
 	quantity int,
-	saleOff int,
 	unitPrice int,
 	guarantee int
 )
@@ -87,9 +86,9 @@ insert into Items values ('HTC Phone', 3, 'Black', 123, '123', 1, 100)
 INSERT INTO Customer VALUES('Kendall','09971281126','P.O. Box 678, 8189 Vestibulum Ave','4081 Egestas. St.'),('Erica','09415464424','P.O. Box 176, 4981 Risus St.','Ap #920-6719 Non Av.'),('Hannah','09857293796','P.O. Box 256, 1082 Mi Road','P.O. Box 281, 5183 Tempor Rd.'),('Oren','09216494838','Ap #693-7351 Vulputate St.','9931 Vel Av.'),('Brynn','09148226619','7274 Nonummy Rd.','789-2018 Vel Rd.'),('Harlan','09262959715','P.O. Box 745, 5432 Lectus Road','4083 Dui. Rd.'),('Kasper','09946465277','P.O. Box 609, 3762 Sed Ave','8764 Et, Avenue'),('Jordan','09839736275','412-9276 Eros St.','P.O. Box 731, 1538 Sed Av.'),('Hedy','09243435392','P.O. Box 941, 8409 Vivamus Avenue','P.O. Box 595, 9332 Quam Av.'),('Stella','09645898125','P.O. Box 975, 5747 Dui Street','P.O. Box 239, 7236 Lorem St.');
 
 insert into Purchase values(1, '12345', '7/6/2017', 123) 
-insert into PurchaseDetail values(1,1, 1, 0, 123, 1) 
-insert into PurchaseDetail values(1,2, 1, 0, 123, 1) 
-insert into PurchaseDetail values(1,3,3,0,123,1)
+insert into PurchaseDetail values(1,1, 1, 123, 123) 
+insert into PurchaseDetail values(1,2, 1, 123, 123) 
+insert into PurchaseDetail values(1,3,3,123,123)
 
 create procedure signIn(
 	@username varchar(25)
@@ -115,11 +114,13 @@ create procedure searchItems(
 )
 as
 begin
-SELECT        Items.mobiName, Supplier.supName, Items.color, Items.screenSize, Items.price, Items.guarantee
+SELECT        mobiID, Items.mobiName, Supplier.supName, Items.color, Items.screenSize, Items.price, Items.guarantee
 FROM            Items INNER JOIN
                          Supplier ON Items.supID = Supplier.supID
 						 where Items.mobiName like '%' + @itemName + '%'
 end
+
+drop procedure searchItems
 
 create procedure searchCustomer(
 	@username varchar(25)
@@ -188,3 +189,7 @@ FROM            Items INNER JOIN
                          PurchaseDetail ON Items.mobiID = PurchaseDetail.mobiID 
                          where purchaseID = @id 
 end 
+
+select * from Purchase
+select * from PurchaseDetail
+select * from Customer

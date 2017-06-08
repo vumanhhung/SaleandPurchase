@@ -5,11 +5,31 @@
  */
 package Run;
 
+import GetConnect.MyConnect;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author monki
  */
 public class CreateOrder extends javax.swing.JFrame {
+
+    public static Home home;
+    public static String employeeCode;
+    private String customerID = "";
+    private int purchaseID;
+    String phone_valid = "0([0-9]{9,11})";
+    Pattern p = Pattern.compile(phone_valid);
+    Matcher m;
 
     /**
      * Creates new form CreateOrder
@@ -33,7 +53,7 @@ public class CreateOrder extends javax.swing.JFrame {
         lbQuantity3 = new javax.swing.JLabel();
         txtTotalPrice = new javax.swing.JTextField();
         tblOrderMobi = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbOrderItemList = new javax.swing.JTable();
         btnAddMobi = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         btnCheckCus = new javax.swing.JButton();
@@ -46,6 +66,7 @@ public class CreateOrder extends javax.swing.JFrame {
         txtAddress = new javax.swing.JTextField();
         lbCusName3 = new javax.swing.JLabel();
         txtComAddress = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -66,30 +87,32 @@ public class CreateOrder extends javax.swing.JFrame {
         lbQuantity3.setToolTipText("");
 
         txtTotalPrice.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtTotalPrice.setText("0");
 
-        jTable1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbOrderItemList.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tbOrderItemList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mobile Name", "Quantity", "Unit Price", "Total Unit Price"
+                "MobiID", "Mobile Name", "Quantity", "Unit Price", "Total Unit Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tblOrderMobi.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
+        tblOrderMobi.setViewportView(tbOrderItemList);
+        if (tbOrderItemList.getColumnModel().getColumnCount() > 0) {
+            tbOrderItemList.getColumnModel().getColumn(0).setResizable(false);
+            tbOrderItemList.getColumnModel().getColumn(1).setResizable(false);
+            tbOrderItemList.getColumnModel().getColumn(2).setResizable(false);
+            tbOrderItemList.getColumnModel().getColumn(3).setResizable(false);
+            tbOrderItemList.getColumnModel().getColumn(4).setResizable(false);
         }
 
         btnAddMobi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -133,6 +156,11 @@ public class CreateOrder extends javax.swing.JFrame {
 
         btnCheckCus.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnCheckCus.setText("Check Customer");
+        btnCheckCus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCheckCusActionPerformed(evt);
+            }
+        });
 
         txtCheckCus.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
@@ -215,23 +243,31 @@ public class CreateOrder extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jButton1.setText("Create Order");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(143, 143, 143))
             .addGroup(layout.createSequentialGroup()
-                .addGap(200, 200, 200)
-                .addComponent(btnReturn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(117, 117, 117)
+                        .addComponent(btnReturn)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,7 +279,9 @@ public class CreateOrder extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnReturn)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnReturn)
+                    .addComponent(jButton1))
                 .addGap(6, 6, 6))
         );
 
@@ -254,8 +292,145 @@ public class CreateOrder extends javax.swing.JFrame {
     private void btnAddMobiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMobiActionPerformed
         AddMobileToOrder amto = new AddMobileToOrder();
         amto.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_btnAddMobiActionPerformed
+
+    private void btnCheckCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckCusActionPerformed
+        String searchByPhone = txtCheckCus.getText();
+        try {
+            Connection conn = MyConnect.getConnection();
+            PreparedStatement ps = conn.prepareStatement("select * from Customer where PhoneNumber = ?");
+            ps.setString(1, searchByPhone);
+            //PreparedStatement ps = conn.prepareStatement("select * from Employee"); 
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                String id = rs.getString("CustomerID");
+                String customerName = rs.getString("CustomerName");
+                String phoneNumber = rs.getString("PhoneNumber");
+                String customerAddress = rs.getString("CustomerAddress");
+                String customerCompanyAddress = rs.getString("CustomerCompanyAddress");
+                customerID = id;
+                txtCusName.setText(customerName);
+                txtCusName.setEditable(false);
+                txtPhone.setText(phoneNumber);
+                txtPhone.setEditable(false);
+                txtAddress.setText(customerAddress);
+                txtAddress.setEditable(false);
+                txtComAddress.setText(customerCompanyAddress);
+                txtComAddress.setEditable(false);
+            } else {
+                JOptionPane.showMessageDialog(null, "New customer. Please enter information.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnCheckCusActionPerformed
+    public String getNewCustomerID() {
+        try {
+            Connection conn = MyConnect.getConnection();
+            PreparedStatement ps = conn.prepareStatement("select MAX(CustomerID) as CustomerID from Customer");
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            return rs.getString("CustomerID");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    public void insertPurchase() {
+        int totalPrice = Integer.valueOf(txtTotalPrice.getText());
+        try {
+            Connection conn = MyConnect.getConnection();
+            PreparedStatement ps = conn.prepareStatement("insert into Purchase values(?, ?, ?, ?) ");
+            DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            Date date = new Date();
+            ps.setString(1, customerID);
+            ps.setString(2, employeeCode);
+            ps.setString(3, dateFormat.format(date));
+            ps.setInt(4, totalPrice);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public int getPurchaseID() {
+        try {
+            Connection conn = MyConnect.getConnection();
+            PreparedStatement ps = conn.prepareStatement("select MAX(purchaseID) as purchaseID from Purchase");
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            return rs.getInt("purchaseID");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public void insertPurchaseDetail() {
+        try {
+            Connection conn = MyConnect.getConnection();
+            DefaultTableModel model = (DefaultTableModel) tbOrderItemList.getModel();
+            int numberOfRows = model.getRowCount();
+            for (int row = 0; row < numberOfRows; row++) {
+                int mobiID = Integer.valueOf(model.getValueAt(row, 0).toString());
+                int quantity = Integer.valueOf(model.getValueAt(row, 2).toString());
+                int unitPrice = Integer.valueOf(model.getValueAt(row, 3).toString());
+                int totalUnitPrice = Integer.valueOf(model.getValueAt(row, 4).toString());
+                PreparedStatement ps = conn.prepareStatement("insert into PurchaseDetail values(?,?, ?, ?, ?) ");
+                ps.setInt(1, purchaseID);
+                ps.setInt(2, mobiID);
+                ps.setInt(3, quantity);
+                ps.setInt(4, unitPrice);
+                ps.setInt(5, totalUnitPrice);
+                ps.executeUpdate();
+            }
+            JOptionPane.showMessageDialog(null, "Order created successfully");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (customerID.equals("")) {
+            String txtCustomerName = txtCusName.getText();
+            String txtCusPhone = txtPhone.getText();
+            String txtCusAddress = txtAddress.getText();
+            String txtCompAddress = txtComAddress.getText();
+            m = p.matcher(txtCusPhone);
+
+            try {
+                if (!m.matches()) {
+                    JOptionPane.showMessageDialog(null, "Invalid phone number!");
+                    txtPhone.setText("");
+                } else {
+                    Connection conn = MyConnect.getConnection();
+                    PreparedStatement ps = conn.prepareStatement("INSERT INTO Customer VALUES(?,?,?,?)");
+                    ps.setString(1, txtCustomerName);
+                    ps.setString(2, txtCusPhone);
+                    ps.setString(3, txtCusAddress);
+                    ps.setString(4, txtCompAddress);
+                    ps.executeUpdate();
+
+                    customerID = getNewCustomerID();
+
+                    insertPurchase();
+
+                    purchaseID = getPurchaseID();
+
+                    insertPurchaseDetail();
+
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            insertPurchase();
+            purchaseID = getPurchaseID();
+            insertPurchaseDetail();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -296,21 +471,22 @@ public class CreateOrder extends javax.swing.JFrame {
     private javax.swing.JButton btnAddMobi;
     private javax.swing.JButton btnCheckCus;
     private javax.swing.JButton btnReturn;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbCusName;
     private javax.swing.JLabel lbCusName1;
     private javax.swing.JLabel lbCusName2;
     private javax.swing.JLabel lbCusName3;
     private javax.swing.JLabel lbQuantity3;
+    public static javax.swing.JTable tbOrderItemList;
     private javax.swing.JScrollPane tblOrderMobi;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtCheckCus;
     private javax.swing.JTextField txtComAddress;
     private javax.swing.JTextField txtCusName;
     private javax.swing.JTextField txtPhone;
-    private javax.swing.JTextField txtTotalPrice;
+    public static javax.swing.JTextField txtTotalPrice;
     // End of variables declaration//GEN-END:variables
 }

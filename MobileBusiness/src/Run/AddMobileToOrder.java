@@ -5,17 +5,48 @@
  */
 package Run;
 
+import GetConnect.MyConnect;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author monki
  */
 public class AddMobileToOrder extends javax.swing.JFrame {
-
+    private String itemID;
+    DefaultTableModel itemModel;
     /**
      * Creates new form AddMobileToOrder
      */
     public AddMobileToOrder() {
         initComponents();
+        itemModel =  (DefaultTableModel) tbMobi.getModel();
+        loadData();
+    }
+    
+    public void loadData(){
+        itemModel.setRowCount(0);
+        try {
+            Connection conn = MyConnect.getConnection();
+            CallableStatement callSt = conn.prepareCall("{call getAllItems()}");
+            //PreparedStatement ps = conn.prepareStatement("select * from Items");
+            ResultSet rs = callSt.executeQuery();
+            while (rs.next()) {
+                String itemID = rs.getString("mobiID");
+                String mobiName = rs.getString("mobiName");
+                String price = rs.getString("price");
+                Object[] row = {itemID, mobiName, price + " $"+ " year"};
+                itemModel.addRow(row);
+            }
+            tbMobi.setModel(itemModel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -66,6 +97,11 @@ public class AddMobileToOrder extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbMobi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbMobiMouseClicked(evt);
+            }
+        });
         tblMobi.setViewportView(tbMobi);
         if (tbMobi.getColumnModel().getColumnCount() > 0) {
             tbMobi.getColumnModel().getColumn(0).setResizable(false);
@@ -76,6 +112,11 @@ public class AddMobileToOrder extends javax.swing.JFrame {
         btnAddToOrder.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnAddToOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/done.png"))); // NOI18N
         btnAddToOrder.setText("Add to Order");
+        btnAddToOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddToOrderActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,8 +161,90 @@ public class AddMobileToOrder extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        // TODO add your handling code here:
+        String searchText = txtSearch.getText();
+        itemModel.setRowCount(0);
+        try {
+            Connection conn = MyConnect.getConnection();
+            CallableStatement callSt = conn.prepareCall("{call searchItems(?)}");
+//            PreparedStatement ps = conn.prepareStatement("select * from Customer where CustomerName like '%?%'"); 
+            callSt.setString(1, searchText);
+            ResultSet rs = callSt.executeQuery();
+            while (rs.next()) {
+                String itemID = rs.getString("mobiID");
+                String mobiName = rs.getString("mobiName");
+                String price = rs.getString("price");
+                Object[] row = {itemID, mobiName, price};
+                itemModel.addRow(row);
+            }
+            tbMobi.setModel(itemModel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnAddToOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToOrderActionPerformed
+        boolean check = false;
+        try {
+            if (itemID == null) {
+                JOptionPane.showMessageDialog(null, "Select an item to add to order");
+            } else {
+                Connection conn = MyConnect.getConnection();
+                PreparedStatement ps = conn.prepareStatement("select * from Items where mobiID = ?");
+                ps.setString(1, itemID);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    int id = rs.getInt("mobiID");
+                    String mobiName = rs.getString("mobiName");
+                    int price = rs.getInt("price");
+                    int quantity = 1;
+                    DefaultTableModel model = (DefaultTableModel) CreateOrder.tbOrderItemList.getModel();
+
+                    int numberOfRows = model.getRowCount();
+                    if (numberOfRows != 0) {
+                        for (int row = 0; row < numberOfRows; row++) {
+                            int mobiID = Integer.valueOf(model.getValueAt(row, 0).toString());
+                            if (mobiID == id) {
+                                int getQuantity = Integer.valueOf(model.getValueAt(row, 2).toString());
+                                int getTotalPrice = Integer.valueOf(CreateOrder.txtTotalPrice.getText());
+                                int newTotalPrice = getTotalPrice + price;
+                                CreateOrder.txtTotalPrice.setText(String.valueOf(newTotalPrice));
+                                int newQuantity = getQuantity + 1;
+                                int newPrice = price * newQuantity;
+ 
+                                model.setValueAt(newQuantity, row, 2);
+                                model.setValueAt(newPrice, row, 4);
+                                check = true;
+                                break;
+                            }
+                        }
+                        if (check == false) {
+                            Object[] rowAdd = {id, mobiName, quantity, price, price};
+                            model.insertRow(0, rowAdd);
+                            int totalPriceBeforeAdd = Integer.valueOf(CreateOrder.txtTotalPrice.getText());
+                            String totalPriceAfterAdd = String.valueOf(totalPriceBeforeAdd + price);
+                            CreateOrder.txtTotalPrice.setText(totalPriceAfterAdd);
+                        }
+                    } else {
+                        Object[] rowAdd = {id, mobiName, quantity, price, price};
+                        model.insertRow(0, rowAdd);
+                        int totalPriceBeforeAdd = Integer.valueOf(CreateOrder.txtTotalPrice.getText());
+                        String totalPriceAfterAdd = String.valueOf(totalPriceBeforeAdd + price);
+                        CreateOrder.txtTotalPrice.setText(totalPriceAfterAdd);
+                    }
+
+                    this.dispose();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnAddToOrderActionPerformed
+
+    private void tbMobiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbMobiMouseClicked
+        int index = tbMobi.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) tbMobi.getModel();
+        itemID = model.getValueAt(index, 0).toString();
+    }//GEN-LAST:event_tbMobiMouseClicked
 
     /**
      * @param args the command line arguments

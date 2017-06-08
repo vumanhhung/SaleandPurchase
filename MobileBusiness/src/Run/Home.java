@@ -143,6 +143,11 @@ public class Home extends javax.swing.JFrame {
 
         btnOrder.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnOrder.setText("Create Order");
+        btnOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOrderActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -281,6 +286,14 @@ public class Home extends javax.swing.JFrame {
         rg.home = this;
         this.dispose();
     }//GEN-LAST:event_btnRegisterActionPerformed
+
+    private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
+        CreateOrder create = new CreateOrder(); 
+        create.setVisible(true); 
+        create.home = this; 
+        create.employeeCode = employeeCode; 
+        this.setVisible(false); 
+    }//GEN-LAST:event_btnOrderActionPerformed
 
     /**
      * @param args the command line arguments
