@@ -40,7 +40,7 @@ public class AddMobileToOrder extends javax.swing.JFrame {
                 String itemID = rs.getString("mobiID");
                 String mobiName = rs.getString("mobiName");
                 String price = rs.getString("price");
-                Object[] row = {itemID, mobiName, price + " $"+ " year"};
+                Object[] row = {itemID, mobiName, price + " $"};
                 itemModel.addRow(row);
             }
             tbMobi.setModel(itemModel);
@@ -196,6 +196,7 @@ public class AddMobileToOrder extends javax.swing.JFrame {
                     int id = rs.getInt("mobiID");
                     String mobiName = rs.getString("mobiName");
                     int price = rs.getInt("price");
+                    String color = rs.getString("color");
                     int quantity = 1;
                     DefaultTableModel model = (DefaultTableModel) CreateOrder.tbOrderItemList.getModel();
 
@@ -204,28 +205,28 @@ public class AddMobileToOrder extends javax.swing.JFrame {
                         for (int row = 0; row < numberOfRows; row++) {
                             int mobiID = Integer.valueOf(model.getValueAt(row, 0).toString());
                             if (mobiID == id) {
-                                int getQuantity = Integer.valueOf(model.getValueAt(row, 2).toString());
+                                int getQuantity = Integer.valueOf(model.getValueAt(row, 3).toString());
                                 int getTotalPrice = Integer.valueOf(CreateOrder.txtTotalPrice.getText());
                                 int newTotalPrice = getTotalPrice + price;
                                 CreateOrder.txtTotalPrice.setText(String.valueOf(newTotalPrice));
                                 int newQuantity = getQuantity + 1;
                                 int newPrice = price * newQuantity;
  
-                                model.setValueAt(newQuantity, row, 2);
-                                model.setValueAt(newPrice, row, 4);
+                                model.setValueAt(newQuantity, row, 3);
+                                model.setValueAt(newPrice, row, 5);
                                 check = true;
                                 break;
                             }
                         }
                         if (check == false) {
-                            Object[] rowAdd = {id, mobiName, quantity, price, price};
+                            Object[] rowAdd = {id, mobiName, color, quantity, price, price};
                             model.insertRow(0, rowAdd);
                             int totalPriceBeforeAdd = Integer.valueOf(CreateOrder.txtTotalPrice.getText());
                             String totalPriceAfterAdd = String.valueOf(totalPriceBeforeAdd + price);
                             CreateOrder.txtTotalPrice.setText(totalPriceAfterAdd);
                         }
                     } else {
-                        Object[] rowAdd = {id, mobiName, quantity, price, price};
+                        Object[] rowAdd = {id, mobiName, color, quantity, price, price};
                         model.insertRow(0, rowAdd);
                         int totalPriceBeforeAdd = Integer.valueOf(CreateOrder.txtTotalPrice.getText());
                         String totalPriceAfterAdd = String.valueOf(totalPriceBeforeAdd + price);

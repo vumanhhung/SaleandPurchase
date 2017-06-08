@@ -33,7 +33,7 @@ public class ItemDetail extends javax.swing.JFrame {
         loadData();
     }
 
-    public static void loadData() {
+    public  void loadData() {
         itemModel.setRowCount(0);
         try {
             Connection conn = MyConnect.getConnection();
@@ -55,6 +55,10 @@ public class ItemDetail extends javax.swing.JFrame {
             tbItems.setModel(itemModel);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        
+        if(Home.employeeRoleHome.equals("0")){
+            btnEdit.setEnabled(false);
         }
     }
 

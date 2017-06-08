@@ -72,6 +72,7 @@ public class EmpPersonalDetail extends javax.swing.JFrame {
 
         txtEmpSalary.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
+        txtDOJ.setEditable(false);
         txtDOJ.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         btnCancel.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -84,8 +85,8 @@ public class EmpPersonalDetail extends javax.swing.JFrame {
         });
 
         btnEdit.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/save.png"))); // NOI18N
-        btnEdit.setText("Update");
+        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/edit.png"))); // NOI18N
+        btnEdit.setText("Edit");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditActionPerformed(evt);

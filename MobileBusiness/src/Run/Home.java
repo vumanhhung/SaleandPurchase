@@ -19,6 +19,7 @@ public class Home extends javax.swing.JFrame {
 
     public static String employeeCode;
     public static String employeeName;
+    public static String employeeRoleHome;
 
     /**
      * Creates new form Home1
